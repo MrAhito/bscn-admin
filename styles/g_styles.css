@@ -1,0 +1,80 @@
+:root{
+    --primary: #fff;
+    /* --primary: #39375B;
+    --primary: #2F2963;
+    --primary: #011627;
+    --primary: #061A40;
+    --primary: #372772; */
+
+/* Secondary */
+    /* --secondary: #1a0e43; */
+    --secondary: #2F2963;
+    /* --secondary: #474056; */
+    /* --secondary: #7D5BA6; */
+    /* --secondary: #745C97; */
+
+/* Tertiary */
+    /* --tertiary: #4d4d80; */
+    /* --tertiary: #F1E4F3; */
+    --tertiary: #454372;
+    /* --tertiary: #8A95A5; */
+    /* --tertiary: #BEB7DF; */
+    /* --tertiary: #4A6FA5; */
+
+/* Font LIGHT */
+    /* --fontLight: #E8EBF7; */
+    /* --fontLight: #FDFFFC; */
+    /* --fontLight: #F7F0F0; */
+    /* --fontLight: #E1DEE9; */
+    /* --fontLight: #DBE9EE; */
+
+/* Font DARK */
+/* --fontDark: #25283D; */
+--fontDark: #c2c2c2;
+--fontDark2: rgb(59, 59, 59);
+
+/* Shadow' */
+/* --shadow: #4F6D7A; */
+--shadow: #2c2a3c;
+}
+
+*{
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 16px;
+}
+
+.container{
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    background-color: var(--primary);
+}
+.content-box{
+    width: 100%;
+    height: 100%;
+    background-color: var(--primary);
+    display: flex;
+    justify-content: center;
+}
+
+
+
+._btn {
+    outline: none;
+    border: 3px solid var(--secondary);
+    background-color: var(--tertiary);
+    color: var(--primary);
+    transition: .3s ease-out;
+}
+
+._btn:hover {
+    border: 3px solid var(--secondary);
+    background-color: var(--primary);
+    color: var(--secondary);
+    transition: .3s ease-out;
+}

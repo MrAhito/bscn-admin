@@ -1,0 +1,154 @@
+<!-- <?php
+session_start();
+
+// $json = file_get_contents('data.json');
+
+// // Decode the JSON file
+// $json_data = json_decode($json, true);
+
+$hostname = "localhost";
+$database = "bscn-db";
+$username = "root";
+$password = "";
+$con = mysqli_connect($hostname, $username, $password, $database);
+
+if ($con->connect_error) {
+    printf("Connect failed: %s<br />", $con->connect_error);
+    exit();
+} else {
+    printf('Connected successfully.<br />');
+}
+<?php
+
+$hostname = "localhost";
+$database = "bscn-db";
+$username = "root";
+$password = "";
+$con = mysqli_connect($hostname, $username, $password, $database);
+
+if ($con->connect_error) {
+    printf("Connect failed: %s<br />", $con->connect_error);
+    exit();
+} else {
+    printf('Connected successfully.<br />');
+}
+
+
+
+$sql = "SELECT * FROM subscriber_tbl";
+
+$result = $con->query($sql);
+if ($result->num_rows > 0) {
+    while ($row = $result->fetch_assoc()) {
+
+        $sqInfo = "UPDATE `subs_info_tbl` SET `ip_address`='" . $row['IPAddr'] . "',`mac_address`='" . $row['MACAddr'] . "' WHERE uid_=" . $row["uid_"] . ";";
+        // if ($con->query($sqInfo)) {
+        //     printf("Record updated successfully.<br />");
+        // }
+        // if ($con->error) {
+        //     printf("Could not insert record into table: %s<br />", $con->error);
+        // }
+    }
+}
+<?php
+
+$hostname = "localhost";
+$database = "bscn-db";
+$username = "root";
+$password = "";
+$con = mysqli_connect($hostname, $username, $password, $database);
+
+if ($con->connect_error) {
+    printf("Connect failed: %s<br />", $con->connect_error);
+    exit();
+} else {
+    printf('Connected successfully.<br />');
+}
+
+
+
+$sql = "SELECT * FROM subscriber_tbl";
+
+$result = $con->query($sql);
+if ($result->num_rows > 0) {
+    while ($row = $result->fetch_assoc()) {
+        if ($row["uid_"] >= 3000) {
+            $sqInfo = "UPDATE `subs_info_tbl` SET `ip_address`='" . $row['IPAddr'] . "',`mac_address`='" . $row['MACAddr'] . "' WHERE uid_=" . $row["uid_"] . ";";
+            // if ($con->query($sqInfo)) {
+            //     printf("Record updated successfully.<br />");
+            // }
+            // if ($con->error) {
+            //     printf("Could not insert record into table: %s<br />", $con->error);
+            // }
+        }
+    }
+}
+$sql = "SELECT * FROM subscriber_tbl";
+
+$result = $con->query($sql);
+if ($result->num_rows > 0) {
+    while ($row = $result->fetch_assoc()) {
+        if ($row["uid_"] > 3000) {
+            $date = new DateTime($row["DATE"]);
+            $dated = $date->format('Y-m-d');
+
+            $sql = "UPDATE subscriber_tbl SET `Date_Installed`= cast('" . $dated . "' AS datetime) WHERE `uid_`=" . $row["uid_"] . ";";
+            // echo "<br/>" . $item['DATE INSTALL'] . "---" . $row["LName"] . " - " . $row["uid_"];
+            // echo "<br/>" . $row['uid_'] . "_____" . $date_ . "";
+            // echo "<br/>" . $sql;
+
+
+            if ($con->query($sql)) {
+                printf("Record updated successfully.<br />");
+            }
+            if ($con->error) {
+                printf("Could not insert record into table: %s<br />", $con->error);
+            }
+        }
+    }
+} else {
+    printf('No record found.<br />');
+}
+mysqli_free_result($result);
+$con->close();
+
+
+// if ($result->num_rows > 0) {
+//     while ($row = $result->fetch_assoc()) {
+//         $date = new DateTime($row["DATE"]);
+//         $date_ = $date->format('Y-m-d');
+//         if ($row['uid_'] < 1000) {
+//             echo "<br/>" . $row['FName'];
+//             // echo "<br/>" . $row['uid_'] . "_____" . $date_ . "";
+//             // $sql = "UPDATE `subscriber_tbl` SET `DATE` = REPLACE(`DATE`, '" . $row["DATE"] . "', " . $date_ . ") WHERE `uid_` LIKE " . $row['uid_'] . ";";
+//             // if ($con->query($sql)) {
+//             //     printf("Record updated successfully.<br />");
+//             // }
+//             // if ($con->error) {
+//             //     printf("Could not insert record into table: %s<br />", $con->error);
+//             // }
+//         }
+//     }
+// } else {
+//     printf('No record found.<br />');
+// }
+// mysqli_free_result($result);
+// $con->close();
+
+
+// if ($row["uid_"] < 1000) {
+
+//     $date = new DateTime($row["DATE"]);
+//     $dated = $date->format('Y-m-d');
+
+//     echo "<br/>" . $dated;
+//     // $sql = "UPDATE subscriber_tbl SET `DATE`= '" . $item['DATE INSTALL'] . "' WHERE `uid_`=" . $row["uid_"];
+//     // // echo "<br/>" . $item['DATE INSTALL'] . "---" . $row["LName"] . " - " . $row["uid_"];
+//     // // echo "<br/>" . $row['uid_'] . "_____" . $date_ . "";
+//     // if ($con->query($sql)) {
+//     //     printf("Record updated successfully.<br />");
+//     // }
+//     // if ($con->error) {
+//     //     printf("Could not insert record into table: %s<br />", $con->error);
+//     // }
+// } -->
