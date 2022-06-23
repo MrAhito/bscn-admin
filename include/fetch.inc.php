@@ -55,7 +55,6 @@ $columns = array(
                 <ul name='opt_list' class='opt_list' id='vieWList".$d."' onclick='setOff(".$d.")'>
                     <li><a href='../include/optRoutes.inc.php?id=".$d."&route=c'>Account Info</a></li>
                     <li class='".$b."'><a href='".$c."'>".$a."</a></li>
-                    <li class='del'><a href='../include/optRoutes.inc.php?id=".$d."&route=b'>Delete</a></li>
                 </ul>
                 <div class='blocker'><div>
             <div>";

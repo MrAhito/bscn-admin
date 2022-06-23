@@ -61,3 +61,25 @@ function userExist($con, $uname)
     mysqli_stmt_close($stmnt);
 }
 //  echo password_hash("pass1234", PASSWORD_DEFAULT);
+
+
+function disconnect($con, $a){
+$sql = "UPDATE subs_info_tbl SET `status`= 0 WHERE `uid_`=" . $a;
+    if ($con->query($sql)) {
+        header('location: ../pages/dashboard.php');
+    }
+    if ($con->error) {
+        printf("Could not insert record into table: %s<br />", $con->error);
+    }
+$con->close();
+}
+function reconnect($con, $a){
+    $sql = "UPDATE subs_info_tbl SET `status`= 1 WHERE `uid_`=" . $a;
+        if ($con->query($sql)) {
+            header('location: ../pages/dashboard.php');
+        }
+        if ($con->error) {
+            printf("Could not insert record into table: %s<br />", $con->error);
+        }
+    $con->close();
+    }

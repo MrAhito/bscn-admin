@@ -52,15 +52,18 @@
     justify-content: center;
     align-items: center;
     font-weight: 500;
+    font-size: .8em;
     padding-top: 5px;
     width: 125px;
     border-bottom: 5px solid var(--secondary);
     color: white;
 }
-
+.header_nav>li>a >i{
+    margin-left: 3px;
+}
 .header_nav>li a:hover,
 .focus {
-    border-bottom: 5px solid var(--fontDark) !important;
+    color: var(--fontDark);
 }
 
 .user_nav {

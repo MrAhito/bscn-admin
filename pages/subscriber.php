@@ -14,41 +14,27 @@ include_once '../include/fetchSubsdata.inc.php';
 <style>
 .section_subs{
     width: 100%;
-    background-color: rgba(194, 194, 194, .3);
-}
-.sub_block{
-    position: absolute;
-    background-color: rgba(194, 194, 194, .3);
-    top: 50px;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
 }
 
 .add_sub {
-    width: 85%;
-    height: 95%;
+    width: 100%;
     overflow: hidden;
     border-radius: 5px;
-    background-color: var(--primary);
 }
 
 .add_head {
     margin: 0;
-    background-color: var(--tertiary);
+    background-color: var(--primary);
     font-size: 0.65em;
     padding: 0 15px;
-    border-bottom: 2px solid var(--secondary);
+    border-bottom: 1px solid var(--secondary);
     display: flex;
     align-items: center;
     justify-content: space-between;
 }
 
 .add_head>h2 {
-    color: var(--primary);
+    color: var(--tertiary);
     font-size: 1.1em;
 }
 .add_head>h2 > i {
@@ -125,7 +111,6 @@ table.dataTable tbody tr {
 <?php
     include_once '../components/navBar.php';
     ?>
-    <div id="subDoc" class="sub_block">
     <div class="add_sub">
         <div class="add_head">
             <h2><i class="fas fa-info-circle"></i> Subscriber</h2>
@@ -344,7 +329,6 @@ table.dataTable tbody tr {
             </table>
         </div>
         </form>
-        </div>
     </div>
 </section>
 <script>

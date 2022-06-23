@@ -9,7 +9,7 @@
 <script>
 $(document).ready(function() {
     var t = $('#subscribers_list').DataTable({
-        stateSave: true,
+        // stateSave: true, 
         responsive: true,
         info: "true",
         dom: 'Blfrtip',
@@ -127,13 +127,22 @@ $(document).ready(function() {
 
 
 window.onclick = function(e) {
-        // alert($(".opt_list").hasClass("viewOpt"));
          if (!e.target.matches('.sett') ) {
-        // alert(!e.target.matches('.opt_list'));
-             if($(".opt_list").hasClass("viewOpt")){
+            if($(".opt_list").hasClass("viewOpt")){
             $(".opt_list").removeClass("viewOpt");
             }
-    }
+        } 
+        
+        if (!e.target.matches('.userIC') ) {
+            if ($('#myDropdown').hasClass('show')) {
+            $('#myDropdown').removeClass('show');
+            }
+        } 
+        if (!e.target.matches('.a_elements') ) {
+            if ($('#elemnt_').hasClass('elShow')) {
+            $('#elemnt_').removeClass('elShow');
+            }
+        } 
 }
 </script>
 

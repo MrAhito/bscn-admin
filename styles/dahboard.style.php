@@ -94,6 +94,7 @@ table.dataTable tbody tr:hover>.sorting_1 {
 .stats_div {
     width: 100px;
     padding: 9px 0px;
+    text-transform: capitalize;
     display: flex;
     justify-content: center;
     align-items: center;
