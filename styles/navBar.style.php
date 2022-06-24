@@ -49,6 +49,7 @@
 
 .header_nav>li>a {
     display: flex;
+    text-decoration: none;
     justify-content: center;
     align-items: center;
     font-weight: 500;
@@ -58,9 +59,11 @@
     border-bottom: 5px solid var(--secondary);
     color: white;
 }
-.header_nav>li>a >i{
+
+.header_nav>li>a>i {
     margin-left: 3px;
 }
+
 .header_nav>li a:hover,
 .focus {
     color: var(--fontDark);
@@ -85,5 +88,70 @@
     font-size: .75rem;
     border-radius: 50%;
     border: 1px solid var(--primary);
+}
+
+.elements,
+.userDrop {
+    position: absolute;
+    background-color: var(--shadow);
+    z-index: 9;
+    display: none;
+    flex-direction: column;
+    border-radius: 4px;
+    top: 42px;
+    overflow: hidden;
+    padding: 0;
+}
+
+.userDrop>a {
+    padding: 8px 30px;
+    text-decoration: none;
+    font-weight: 700;
+    color: var(--primary);
+    font-size: .65em;
+    transition: .3s ease-in-out;
+}
+
+.userDrop>a>i {
+    font-size: .9em;
+    margin-right: 5px;
+    margin-left: -5px;
+}
+
+.userDrop>a:hover {
+    background-color: var(--fontDark);
+    transition: .3s ease-in-out;
+    color: var(--secondary);
+}
+
+.elShow,
+.show {
+    display: flex;
+}
+
+
+.elements {
+    top: 35px;
+}
+
+.elements>li {
+    display: flex;
+}
+
+.elements>li>a {
+    padding: 6px 25px;
+    width: 100%;
+    color: var(--primary);
+    font-size: .65em;
+}
+
+.elements>li>a>i {
+    font-size: .95em;
+    margin-right: 5px;
+}
+
+.elements>li>a:hover {
+    background-color: var(--fontDark);
+    color: var(--secondary) !important;
 }
 </style>
