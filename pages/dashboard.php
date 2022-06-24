@@ -40,6 +40,6 @@ include_once '../styles/dahboard.style.php';
     </div>
 </section>
 <?php
-include_once "../components/addSubs.php";
+include "../components/addSubs.php";
 include_once '../themes/footer.php';
 ?>
