@@ -14,7 +14,7 @@
 }
 
 .add_sub {
-    width: 85%;
+    width: 60%;
     overflow: hidden;
     border-radius: 5px;
     background-color: var(--primary);
@@ -57,8 +57,9 @@
     display: grid;
     grid-template-columns: repeat(12, 1fr);
     padding: 20px;
-    column-gap: 30px;
-    row-gap: 10px;
+    padding-bottom: 50px;
+    row-gap: 20px;
+    column-gap: 50px;
 }
 
 .gr1 {
@@ -107,31 +108,39 @@
 
 
 .header1 {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
     font-weight: 600;
     font-size: .8em;
+    border-bottom: 1px solid var(--secondary);
 }
-
+.bt_5{
+    margin-top: 20px;
+}
 .form_add>form-control {
     display: flex;
+    justify-content: space-between;
     align-items: center;
 }
 
-.form_add>form-control>label > pre {
-    font-size: 0.7em;
+.form_add>form-control> label {
+    font-size: 0.8em;
+    margin-right: 5px;
+    font-weight: 600;
 }
 
 .form_add>form-control>input,
 .form_add>form-control>select {
-    width: 100%;
+    width: 70%;
     background-color: var(--fontDark);
     filter: brightness(1.25);
-    font-size: 0.65em;
+    font-size: 0.75em;
     border-radius: 5px;
     border: none;
     text-transform: uppercase;
-    padding: 9px;
-    border: 1px solid var(--fontDark2);
-  box-shadow: 1px 1px 5px var(--fontDark2);
+    padding: 8px ;
+    border-bottom: 1px solid var(--fontDark2);
     outline: none;
 }
 .form_add>form-control>input:not(:placeholder-shown){
@@ -153,7 +162,7 @@
 .form_add>form-control>select:hover,
 .form_add>form-control>select:focus {
   box-shadow: 1px 1px 5px var(--secondary);
-    border: 1px solid var(--secondary);
+  border-bottom: 1px solid var(--secondary);
 }
 
 .opt_brgy {
@@ -173,14 +182,13 @@ justify-content: end;
 .addFormBtn{
     display:flex;
     align-items: center;
-    font-size:.8em;
+    font-size:.9em;
     border-radius: 4px;
     font-weight: 600;
-    margin-top: 25px;
     padding: 7px;
 }
 .addFormBtn > i{
-    font-size:1em;
+    font-size:1.2em;
     margin-right:5px;
 }
 </style>

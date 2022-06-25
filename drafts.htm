@@ -151,4 +151,323 @@ $con->close();
 //     // if ($con->error) {
 //     //     printf("Could not insert record into table: %s<br />", $con->error);
 //     // }
-// } -->
+// } 
+
+<?php
+include_once '../themes/header.php';
+include '../include/db.inc.php';
+
+$json = file_get_contents('../data/data.json');
+
+// Decode the JSON file
+$json_data = json_decode($json, true);
+
+$no = 1;
+
+foreach ($json_data as $item) {
+    $discoDate = '';
+    $reconDate = '';
+
+    $cnum = "";
+    if (strlen($item['CONTACT #']) == 10 && $item['CONTACT #'][0] == 9) {
+        $cnum = "0" . substr($item['CONTACT #'], 0, 3) . "-" . substr($item['CONTACT #'], 3, 3) . "-" . substr($item['CONTACT #'], 6, 4);
+    } else {
+        $cnum = $item['CONTACT #'];
+    }
+
+
+    if (strlen($item['DATE RECONNECTED']) == 10) {
+        $recon = new DateTime($item['DATE RECONNECTED']);
+        $reconDate =  $recon->format('Y/m/d');
+    }
+    if (strlen($item['DATE DISCONNECTED']) < 15) {
+        $disco = new DateTime($item['DATE DISCONNECTED']);
+        $discoDate =  $disco->format('Y/m/d');
+    }
+    if ($item['DATE INSTALL'] == 'Decenber 14, 2021') {
+        $date = new DateTime('12/14/2021');
+        $formattedDate =  $date->format('Y/m/d');
+    } else {
+        $date = new DateTime($item['DATE INSTALL']);
+        $formattedDate =  $date->format('Y/m/d');
+    }
+    if($item['STATUS'] == 'DELETED NMS'){
+        $item['STATUS'] = 0;
+    }
+    if(stripslashes($item['STATUS']) == ""){
+        $item['STATUS'] = 1;
+    }
+    
+    // if ($item['#'] >= 2000 && $item['#'] < 3000) {
+        if ($item['#'] >= 3000) {
+            // echo"<br/>".$item['#']."___".$no;
+            // $no++;
+        $sqlinfo = "INSERT INTO `subs_info_tbl`
+        (`status`, `fname`, `mname`, `lname`, `contact_`, `email`, `address`, `ip_address`, `mac_address`,
+        `type`, `plan`, `lineman`, `date_installed`, `disco`, `recon`) 
+        VALUES 
+        (" . $item['STATUS'] . ", '" . $item['FIRST NAME'] . "', '" . $item['MIDDLE NAME'] . "', '" . $item['LAST NAME'] . "', '" . $item['CONTACT #'] . "', '" . $item['REMARKS'] . "',
+         '" . $item['ADDRESS'] . "', '" . $item['IP ADDRESS'] . "', '" . $item['MAC ADDRESS'] . "', '" . $item['APPLICATION'] . "', '" . $item['PLAN'] . "', '" . $item['LINEMAN'] . "', 
+        cast('" . $formattedDate . "' AS datetime), cast('" . $discoDate . "' AS datetime), cast('" . $reconDate . "' AS datetime))";
+
+        if ($con->query($sqlinfo)) {
+            $id_ = $con->insert_id;
+            $sqL = "INSERT INTO `subs_equip_tbl`
+            (`subs_id`, `ip`, `mac`, `serial`, `nap`, `lcp`, `gpon`, `wr_type`) 
+            VALUES 
+            (" . $id_ . ", '" . $item['IP ADDRESS'] . "', '" . $item['MAC ADDRESS'] . "', '" . $item['SERIAL NO.'] . "', '" . $item['NAP # / SLOT #'] . "',
+             '" . $item['LCP / OLT #'] . "', '" . $item['GPON #'] . "', '" . $item['WIRE'] . "')";
+
+            if ($con->query($sqL)) {
+                printf("Record updated successfully.<br />");
+            }
+            if ($con->error) {
+                printf("Could not insert record into table: %s<br />", $con->error);
+            }
+        }
+        if ($con->error) {
+            printf("Could not insert record into table: %s<br />", $con->error);
+        }
+    }
+}
+?>
+
+<?php
+include_once '../themes/footer.php';
+?>
+#
+STATUS
+LAST NAME
+FIRST NAME
+MIDDLE NAME
+CONTACT #
+REMARKS
+ADDRESS
+IP ADDRESS
+MAC ADDRESS
+SERIAL NO.
+NAP # / SLOT #
+LCP / OLT #
+GPON #
+PLAN
+MBPS
+DATE INSTALL
+APPLICATION
+LINEMAN
+DATE DISCONNECTED
+DATE RECONNECTED
+WIRE 
+
+
+
+
+
+ <form-control class="gr6-1">
+                <label><pre>Last Name: </pre></label>
+                <input type="text" value="<?php echo"".$lname;?>" name="lname" required/>
+            </form-control>
+            <form-control class="gr6-2">
+                <label><pre>First Name: </pre></label>
+                <input type="text" value="<?php echo"".$fname;?>" name="fname" required/>
+            </form-control>
+            <form-control class="gr6-3">
+                <label><pre>Middle Name: </pre></label>
+                <input type="text" value="<?php echo"".$mname;?>" name="mname" />
+            </form-control>
+            <form-control class="gr6-4">
+                <label><pre>Contact #: </pre></label>
+                <input type="text" value="<?php echo"".$contact_;?>"  pattern="[0-9]{4}[-][0-9]{3}[-][0-9]{4}" name="cnum" required />
+            </form-control>
+            <form-control class="gr9-2">
+                <label><pre>Email Address: </pre></label>
+                <input type="text" value="<?php echo"".$email;?>" name="fname" name="addr" required />
+            </form-control>
+            <form-control class="gr6-1">
+                <label><pre>Municipality: </pre></label>
+                <select onchange="selectOpt(this)" name="mun"  required>
+                    <option value="" hidden>Municipality/City</option>
+                    <option <?php if($mun == "BALANGA CITY"){echo"selected";}?> value="BALANGA CITY">Balanga City</option>
+                    <option <?php if($mun == "PILAR"){echo"selected";}?> value="PILAR">Pilar</option>
+                    <option <?php if($mun == "ORION"){echo"selected";}?> value="ORION">Orion</option>
+                </select>
+            </form-control>
+            <form-control class="gr6-2">
+                <label><pre>Barangay: </pre></label>
+                <select id='brgySel' name="brgy" required>
+                    <option value="" hidden>Barangay</option>
+                    <?php
+                    include '../data/address.php';
+                    foreach ($brgy as $val) {
+                        echo "<option ";
+                         if($brgy_ == strtoupper($val[1])){echo"selected";}
+                         echo" id='" . $val[0] . "' class='opt_brgy' value='" . $val[1] . "'>" . $val[1] . "</option>";
+                    }
+                    ?>
+                </select>
+            </form-control>
+            <form-control class="gr6-3">
+                <label><pre>Municipality: </pre></label>
+                <select onchange="selectOpt(this)" name="mun"  required>
+                    <option value="" hidden>Municipality/City</option>
+                    <option <?php if($mun == "BALANGA CITY"){echo"selected";}?> value="BALANGA CITY">Balanga City</option>
+                    <option <?php if($mun == "PILAR"){echo"selected";}?> value="PILAR">Pilar</option>
+                    <option <?php if($mun == "ORION"){echo"selected";}?> value="ORION">Orion</option>
+                </select>
+            </form-control>
+            <form-control class="gr6-4">
+                <label><pre>Barangay: </pre></label>
+                <select id='brgySel' name="brgy" required>
+                    <option value="" hidden>Barangay</option>
+                    <?php
+                    include '../data/address.php';
+                    foreach ($brgy as $val) {
+                        echo "<option ";
+                         if($brgy_ == strtoupper($val[1])){echo"selected";}
+                         echo" id='" . $val[0] . "' class='opt_brgy' value='" . $val[1] . "'>" . $val[1] . "</option>";
+                    }
+                    ?>
+                </select>
+            </form-control>
+            <form-control class="gr9-2">
+                <label><pre>Address: </pre></label>
+                <input type="text" value="<?php if($addr == ' '){echo"".$address;}else{echo"".$addr;}?>" name="fname" name="addr" required />
+            </form-control>
+            <span class="header1 gr1 bt_5">Account Information</span>
+            <form-control class="gr2-1">
+                <label><pre>Subscriber: </pre></label>
+                <select onchange="selectSubs(this)" name="subs" required>
+                    <option value="" hidden>SELECT SUBSCRIBER TYPE</option>
+                    <option <?php if($subs_type == "new"){echo"selected";}?> value="new">NEW INSTALL</option>
+                    <option <?php if($subs_type == "cable"){echo"selected";}?> value="cable">EXISTING CABLE ONLY</option>
+                    <option <?php if($subs_type == "docsis"){echo"selected";}?> value="docsis">EXISTING DOCSIS</option>
+                </select>
+            </form-control>
+            <form-control class="gr2-2" >
+                <label><pre>Installation: </pre></label>
+                <select id="install_type" onchange="selectInst(this)" name="install" required>
+                    <option value="" hidden>SELECT INSTALLATION TYPE</option>
+                    <option <?php if($install_type == "catv"){echo"selected";}?> style="display:none" id='newsub-1' value="catv">CABLE ONLY</option>
+                    <option <?php if($install_type == "netonly"){echo"selected";}?> style="display:none" id='newsub-2' value="netonly">INTERNET ONLY</option>
+                    <option <?php if($install_type == "catvnet"){echo"selected";}?> style="display:none" id='newsub-3' value="catvnet">CABLE AND INTERNET</option>
+                    <option <?php if($install_type == "fbr_catv"){echo"selected";}?> style="display:none" id='existc-1' value="fbr_catv">UPGRADE TO FIBER CATV</option>
+                    <option <?php if($install_type == "fbr_catvnet"){echo"selected";}?> style="display:none" id='exist-1' value="fbr_catvnet">UPGRADE TO FIBER </option>
+                    <option <?php if($install_type == "fbr_netonly"){echo"selected";}?> style="display:none" id='exist-2' value="fbr_netonly">UPGRADE TO FIBER DISCO-CABLE</option>
+                </select>
+            </form-control>
+            <form-control class="gr2-3">
+                <label><pre>Plan/Bundle: </pre></label>
+                <select id="plan_type" name="plan" required>
+                    <option value="" hidden>SELECT PLAN/BUNDLE</option>
+                    <?php
+                    include '../include/db.inc.php';
+                        $sql = "SELECT * FROM package_tbl";
+
+                        $result = $con->query($sql);
+                        if ($result->num_rows > 0) {
+                            while ($row = $result->fetch_assoc()) {
+                               echo"<option ";
+                               if($plan == $row['code']){echo"selected ";}
+                               echo"id='".$row['code']."' style='display:none' value='".$row['code']."'>".$row['desc_']."</option>";
+                            }
+                        }
+                        mysqli_free_result($result);
+                        $con->close();
+
+                    ?>
+                </select>
+            </form-control>
+            <form-control class="gr2-1">
+                <label><pre>Lineman: </pre></label>
+                <input type="text"  value="<?php echo"".$lineman;?>" name="lineman" required/>
+            </form-control>
+
+            <span class="header1 gr1 bt_5">Equipment Information</span>
+            <form-control class="gr5-1">
+                <label><pre>IP Address: </pre></label>
+                <input type="text" value="<?php echo"".$ip_address;?>"  name="ip" id="ip" required disabled/>
+            </form-control>
+            <form-control class="gr5-2">
+                <label><pre>MAC Address: </pre></label>
+                <input type="text" value="<?php echo"".$mac_address;?>" name="mac" id="mac" required disabled/>
+            </form-control>
+            <form-control class="gr5-3">
+                <label><pre>SERIAL #: </pre></label>
+                <input type="text" value="<?php echo"".$serial;?>"  name="serial" id="serial" required disabled/>
+            </form-control>
+            <form-control class="gr5-4">
+                <label><pre>ONU Model: </pre></label>
+                <select id="onu_model" name="onu_model" required>
+                    <option value="" hidden>SELECT ONU MODEL</option>
+                    <?php
+                    include '../include/db.inc.php';
+                        $sql = "SELECT * FROM onu_tbl";
+
+                        $result = $con->query($sql);
+                        if ($result->num_rows > 0) {
+                            while ($row = $result->fetch_assoc()) {
+                               echo"<option ";
+                                if($onu_model == $row['code']){echo"selected";}
+                               echo" id='".$row['code']."'  value='".$row['code']."'>".$row['dec_']."</option>";
+                            }
+                        }
+                        mysqli_free_result($result);
+                        $con->close();
+
+                    ?>
+                </select>
+            </form-control>
+            <form-control class="gr5-1">
+                <label><pre>Box #: </pre></label>
+                <input type="text" value="<?php echo"".$box;?>" name="boxn" id="boxn" required disabled/>
+            </form-control>
+            <form-control class="gr5-2">
+                <label><pre>Card #: </pre></label>
+                <input type="text" value="<?php echo"".$card;?>" name="cardn" id="cardn" required disabled/>
+            </form-control>
+            <form-control class="gr4-4">
+                <label><pre>Wire: </pre></label>
+                <select name="wr_type" required>
+                    <option value="" hidden>SELECT WIRE</option>
+                    <option <?php if($wr_type == 'FBR'){echo"selected";}?> value="fbr">FIBER WIRE</option>
+                    <option <?php if($wr_type == 'COAX'){echo"selected";}?> value="coax">COAXIAL WIRE</option>
+                </select>
+            </form-control>
+            <form-control class="gr4-5">
+                <label><pre>Wire Start: </pre></label>
+                <input type="number" value="<?php echo"".$wr_start;?>" name="wrStr" required/>
+            </form-control>
+            <form-control class="gr4-6">
+                <label><pre>Wire End: </pre></label>
+                <input type="number"  value="<?php echo"".$wr_end;?>" name="wrEnd" required/>
+            </form-control>
+            <form-control class="gr4-1">
+                <label><pre>NAP #: </pre></label>
+                <input type="text"  value="<?php echo"".$nap;?>" name="nap" id="nap" required disabled/>
+            </form-control>
+            <form-control class="gr4-2">
+                <label><pre>Slot #: </pre></label>
+                <input type="number" value="<?php echo"".$slot;?>" name="slot" id="slot" required disabled/>
+            </form-control>
+            <form-control class="gr4-3">
+                <label><pre>Layer: </pre></label>
+                <input type="text" value="<?php echo"".$layer;?>" name="layer" id="layer" required disabled/>
+            </form-control>
+            <form-control class="gr4-4">
+                <label><pre>LCP #: </pre></label>
+                <input type="text" value="<?php echo"".$lcp;?>" name="lcp" id="lcp" required disabled/>
+            </form-control>
+            <form-control class="gr4-5">
+                <label><pre>OLT #: </pre></label>
+                <input type="number" value="<?php echo"".$olt;?>" name="olt" id="olt" required disabled/>
+            </form-control>
+            <form-control class="gr4-6">
+                <label><pre>GPON #: </pre></label>
+                <input type="text" value="<?php echo"".$gpon;?>" name="gpon" id="gpon" required disabled/>
+            </form-control>
+            <br/>
+
+
+
+
+
+-->

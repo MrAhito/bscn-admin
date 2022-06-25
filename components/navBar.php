@@ -6,10 +6,10 @@
         <span class="ic_txt">BSCNI - Monitoring</span>
     </div>
     <ul class="header_nav">
-        <li><a href="../pages/home.php">Home</a></li>
+        <li><a href="../pages/dashboard.php">Home</a></li>
         <li>
             <ul class="elements" id="elemnt_">
-                <li><a><i class="fas fa-users"></i>Subscribers</a></li>
+                <li><a href="../include/optRoutes.inc.php?route=''&id=''"><i class="fas fa-users"></i>Subscribers</a></li>
                 <li><a><i class="fas fa-map"></i>Plans</a></li>
                 <li><a><i class="fas fa-hdd"></i>ONUs</a></li>
             </ul>

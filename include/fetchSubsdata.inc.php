@@ -10,6 +10,7 @@ $fname =  $row['fname'];
 $mname =  $row['mname'];
 $lname =  $row['lname'];
 $contact_ =  $row['contact_'];
+$email = trim($row['email']);
 $address =  $row['address'];
 $ip_address =  $row['ip_address'];
 $mac_address =  $row['mac_address'];
@@ -47,10 +48,4 @@ mysqli_free_result($res);
 $sq = "SELECT * FROM subs_history_tbl WHERE uid_ = ".$_SESSION['__id']."";
 
 $resu = $con->query($sq);
-
-
-
-// $sqlEquip = "INSERT INTO `subs_equip_tbl`
-// (`ip`, `mac`, `serial`, `onu_model`, `nap`, `slot`, `layer`, `lcp`, `olt`, `gpon`, `wr_type`, `wr_start`, `wr_end`, `box`, `card`) 
-// VALUES 
 ?>

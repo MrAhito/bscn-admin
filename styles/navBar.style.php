@@ -140,6 +140,7 @@
 
 .elements>li>a {
     padding: 6px 25px;
+    text-decoration: none;
     width: 100%;
     color: var(--primary);
     font-size: .65em;

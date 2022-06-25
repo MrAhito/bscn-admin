@@ -4,6 +4,7 @@ if (isset($_SESSION['code']) && isset($_GET['id']) && isset($_GET['route'])) {
     $_SESSION['__id'] = $_GET['id'];
     
     if($_GET['route'] == 'c'){
+        $_SESSION['view'] = 'info'; 
         header('location: ../pages/subscriber.php');
     }else if($_GET['route'] == 'r'){
         include_once '../include/functions.inc.php';
@@ -14,7 +15,9 @@ if (isset($_SESSION['code']) && isset($_GET['id']) && isset($_GET['route'])) {
         include_once '../include/db.inc.php';
         disconnect($con, $_SESSION['__id']);
     }else{
-
+        unset($_SESSION['view']);
+        unset($_SESSION['__id']);
+        header('location: ../pages/subscriber.php');
     }
 } else {
     header("location: ../pages/log-in.php");

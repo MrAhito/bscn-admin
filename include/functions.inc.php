@@ -66,7 +66,7 @@ function userExist($con, $uname)
 function disconnect($con, $a){
 $sql = "UPDATE subs_info_tbl SET `status`= 0 WHERE `uid_`=" . $a;
     if ($con->query($sql)) {
-        header('location: ../pages/dashboard.php');
+        header('location: ../pages/subscriber.php');
     }
     if ($con->error) {
         printf("Could not insert record into table: %s<br />", $con->error);
@@ -76,7 +76,7 @@ $con->close();
 function reconnect($con, $a){
     $sql = "UPDATE subs_info_tbl SET `status`= 1 WHERE `uid_`=" . $a;
         if ($con->query($sql)) {
-            header('location: ../pages/dashboard.php');
+            header('location: ../pages/subscriber.php');
         }
         if ($con->error) {
             printf("Could not insert record into table: %s<br />", $con->error);
