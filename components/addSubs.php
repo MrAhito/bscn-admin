@@ -6,30 +6,31 @@
             <i class="fas fa-times" onclick="hideAdd()"></i>
         </div>
         <form class="form_add" method="POST" id='formAdd' action="../include/addSubs.inc.php">
-            <span class="header1 gr1">Personal Information 
-                <button type="submit" name="submit" class='_btn addFormBtn'><i class="fas fa-save"></i>Add
-                    Subscriber</button></span>
+            <span class="header1 gr1">
+                <h2>Personal Information</h2>
+                <button type="submit" name="submit" class='_btn addFormBtn'><i class="fas fa-save"></i>Save</button>
+            </span>
             <form-control class="gr2-1">
                 <label>
-                   Last Name:
+                    <pre>Last Name: </pre>
                 </label>
                 <input type="text" placeholder="Last Name" name="lname" required />
             </form-control>
             <form-control class="gr2-2">
                 <label>
-                   First Name:
+                    <pre>First Name: </pre>
                 </label>
                 <input type="text" placeholder="First Name" name="fname" required />
             </form-control>
             <form-control class="gr2-3">
                 <label>
-                   Middle Name:
+                    <pre>Middle Name: </pre>
                 </label>
                 <input type="text" placeholder="Middle Name" name="mname" />
             </form-control>
             <form-control class="gr2-1">
                 <label>
-                   Municipality:
+                    <pre>Municipality: </pre>
                 </label>
                 <select onchange="selectOpt(this)" name="mun" required>
                     <option value="" hidden>Select Municipality</option>
@@ -40,7 +41,7 @@
             </form-control>
             <form-control class="gr2-2">
                 <label>
-                   Barangay:
+                    <pre>Barangay: </pre>
                 </label>
                 <select id='brgySel' name="brgy" required>
                     <option value="" hidden>Select Barangay</option>
@@ -54,30 +55,31 @@
             </form-control>
             <form-control class="gr2-3">
                 <label>
-                   Address:
+                    <pre>Address: </pre>
                 </label>
                 <input type="text" placeholder="Address" name="addr" required />
             </form-control>
             <form-control class="gr2-1">
                 <label>
-                   Contact:
+                    <pre>Contact: </pre>
                 </label>
                 <input type="text" placeholder="Mobile Number" pattern="[0-9]{4}[-][0-9]{3}[-][0-9]{4}" name="cnum"
                     required />
             </form-control>
             <form-control class="gr2-2">
                 <label>
-                   Email Add:
+                    <pre>Email Add: </pre>
                 </label>
-                <input type="email" placeholder="Email Address"  name="email"
-                    required />
+                <input class="email" type="email" placeholder="Email Address" name="email" />
             </form-control>
-            
-            <br/><br/>
-            <span class="header1 gr1 bt_5">Account Information</span>
+
+            <br /><br />
+            <span class="header1 gr1 bt_5">
+                <h2>Account Information</h2>
+            </span>
             <form-control class="gr2-1">
                 <label>
-                   Subscriber:
+                    <pre>Subscriber: </pre>
                 </label>
                 <select onchange="selectSubs(this)" name="subs" required>
                     <option value="" hidden>SELECT SUBSCRIBER TYPE</option>
@@ -88,7 +90,7 @@
             </form-control>
             <form-control class="gr2-2">
                 <label>
-                   Installation:
+                    <pre>Installation: </pre>
                 </label>
                 <select id="install_type" onchange="selectInst(this)" name="install" required>
                     <option value="" hidden>SELECT INSTALLATION TYPE</option>
@@ -102,7 +104,7 @@
             </form-control>
             <form-control class="gr2-3">
                 <label>
-                   Plan/Bundle:
+                    <pre>Plan/Bundle: </pre>
                 </label>
                 <select id="plan_type" name="plan" required>
                     <option value="" hidden>SELECT PLAN/BUNDLE</option>
@@ -124,33 +126,35 @@
             </form-control>
             <form-control class="gr2-1">
                 <label>
-                   Lineman:
+                    <pre>Lineman: </pre>
                 </label>
                 <input type="text" placeholder="LINEMAN" name="lineman" required />
             </form-control>
 
-            <span class="header1 gr1 bt_5">Equipment Information</span>
+            <span class="header1 gr1 bt_5">
+                <h2>Equipment Information</h2>
+            </span>
             <form-control class="gr5-1">
                 <label>
-                   IP:
+                    <pre>IP: </pre>
                 </label>
                 <input type="text" placeholder="IP ADDRESS" name="ip" id="ip" required disabled />
             </form-control>
             <form-control class="gr5-2">
                 <label>
-                   MAC:
+                    <pre>MAC: </pre>
                 </label>
                 <input type="text" placeholder="MAC ADDRESS" name="mac" id="mac" required disabled />
             </form-control>
             <form-control class="gr5-3">
                 <label>
-                   SERIAL:
+                    <pre>SERIAL: </pre>
                 </label>
                 <input type="text" placeholder="SERIAL NUMBER" name="serial" id="serial" required disabled />
             </form-control>
             <form-control class="gr5-4">
                 <label>
-                   ONU Model:
+                    <pre>ONU Model: </pre>
                 </label>
                 <select id="onu_model" name="onu_model" required disabled>
                     <option value="" hidden>SELECT ONU MODEL</option>
@@ -172,19 +176,19 @@
             </form-control>
             <form-control class="gr5-1">
                 <label>
-                   Box:
+                    <pre>Box: </pre>
                 </label>
                 <input type="text" placeholder="BOX NUMBER" name="boxn" id="boxn" required disabled />
             </form-control>
             <form-control class="gr5-2">
                 <label>
-                   Card:
+                    <pre>Card: </pre>
                 </label>
                 <input type="text" placeholder="CARD NUMBER" name="cardn" id="cardn" required disabled />
             </form-control>
             <form-control class="gr4-4">
                 <label>
-                   Wire:
+                    <pre>Wire: </pre>
                 </label>
                 <select name="wr_type" required>
                     <option value="" hidden>type</option>
@@ -194,49 +198,49 @@
             </form-control>
             <form-control class="gr4-5">
                 <label>
-                   Start:
+                    <pre>Start: </pre>
                 </label>
                 <input type="number" placeholder="WIRE START" name="wrStr" required />
             </form-control>
             <form-control class="gr4-6">
                 <label>
-                   End:
+                    <pre>End: </pre>
                 </label>
                 <input type="number" placeholder="WIRE END" name="wrEnd" required />
             </form-control>
             <form-control class="gr4-1">
                 <label>
-                   NAP:
+                    <pre>NAP: </pre>
                 </label>
                 <input type="text" placeholder="NAP" name="nap" id="nap" required disabled />
             </form-control>
             <form-control class="gr4-2">
                 <label>
-                   Slot:
+                    <pre>Slot: </pre>
                 </label>
                 <input type="number" placeholder="SLOT" name="slot" id="slot" required disabled />
             </form-control>
             <form-control class="gr4-3">
                 <label>
-                   Layer:
+                    <pre>Layer: </pre>
                 </label>
                 <input type="text" placeholder="LAYER" name="layer" id="layer" required disabled />
             </form-control>
             <form-control class="gr4-4">
                 <label>
-                   LCP:
+                    <pre>LCP: </pre>
                 </label>
                 <input type="text" placeholder="LCP" name="lcp" id="lcp" required disabled />
             </form-control>
             <form-control class="gr4-5">
                 <label>
-                   OLT:
+                    <pre>OLT: </pre>
                 </label>
                 <input type="number" placeholder="OLT" name="olt" id="olt" required disabled />
             </form-control>
             <form-control class="gr4-6">
                 <label>
-                   GPON:
+                    <pre>GPON: </pre>
                 </label>
                 <input type="text" placeholder="GPON" name="gpon" id="gpon" required disabled />
             </form-control>

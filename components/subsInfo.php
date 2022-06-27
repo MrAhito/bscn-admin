@@ -1,70 +1,308 @@
-<style>
-
-    .p_info{
-        display:flex;
-        align-items: center;
-        justify-content: center;
-        flex-direction: row;
-        height: fit-content;
-    }
-    .info_container{
-        padding: 0;
-        border-radius: 8px;
-        display: flex;
-        overflow: hidden;
-        align-items: baseline;
-        margin-right: 25px;
-        justify-content: center;
-    }
-    .info_container>pre{
-        background: linear-gradient(to left top, var(--secondary), var(--tertiary2));
-        margin: 0;
-        font-weight: 600;
-        padding: 7px 5px 7px 10px;
-        font-size: .8em;
-        color: var(--primary);
-    }
-    .info_container > span{
-        font-size: .8em;
-        margin: 0;
-        padding: 5px 10px;
-        width: 150px;
-        border-bottom: 2px solid var(--secondary);
-        display: flex;
-        height: fit-content;
-    }
-    .gr1{
-        font-size: .9em;
-    }
-</style>
-    <div class="info_sub ">
-        <div class="add_head inf_head">
-            <h2><i class="fas fa-info-circle"></i> Subscriber</h2>
-        </div>
-        <div class="form_add inf_" id='formAdd'>
-            <span class="header1 gr1">Personal Information 
-                <button type="submit" name="submit" class='_btn addFormBtn'><i class="fas fa-edit"></i>
-                Edit Subscriber's Info</button></span>
-            <div class="p_info">
-                <div class="info_container">
-                    <pre>First Name: </pre>
-                    <span><?php echo"".$fname ?></span>
-                </div>
-
-                <div class="info_container">
-                    <pre>Middle Name: </pre>
-                    <span><?php echo"".$mname ?></span>
-                </div>
-
-                <div class="info_container">
-                    <pre>Last Name: </pre>
-                    <span><?php echo"".$lname ?></span>
-                </div>
-
+<?php include '../styles/subsInfo.style.php'; ?>
+<div class="info_sub ">
+    <div class="add_head inf_head">
+        <a href="../include/optRoutes.inc.php?route=''&id=''"><i class="fas fa-arrow-left"></i> Subscribers List</a>
+    </div>
+    <form class="form_add inf_" id='formAdd'>
+        <span class="header1 gr1">
+            <h2>Personal Information</h2>
+            <div class="divEdit sinBtn showInfBtn   ">
+                <button id="editBtn" type="button" onclick="editableInputs()" class='_btn subsInfBtn'><i
+                        class="fas fa-edit"></i>Edit</button>
             </div>
-           
-            <span class="header1 gr1">History</span>
-            <div class="table-responsive gr1 historyTBL">
+            <div class="divEdit douBtn">
+                <button id="cancelBtn" type="button" onclick="cancelInputs()" class='_btn subsInfBtn canc'><i
+                        class="fas fa-ban"></i>Cancel</button>
+                <button id="saveBtn" type="submit" name="submit" class='_btn subsInfBtn'><i
+                        class="fas fa-save"></i>Save</button>
+            </div>
+        </span>
+        <form-control class="gr6-1 ">
+            <label>
+                <pre>Last Name: </pre>
+            </label>
+            <input type="text" value="<?php echo "" . $lname; ?>" name="lname" id="lname" required />
+        </form-control>
+        <form-control class="gr6-2">
+            <label>
+                <pre>First Name: </pre>
+            </label>
+            <input type="text" value="<?php echo "" . $fname; ?>" name="fname" id="fname" required />
+        </form-control>
+        <form-control class="gr6-3">
+            <label>
+                <pre>Middle Name: </pre>
+            </label>
+            <input type="text" value="<?php echo "" . $mname; ?>" name="mname" id="mname" />
+        </form-control>
+        <form-control class="gr6-4">
+            <label>
+                <pre>Municipality: </pre>
+            </label>
+            <select onchange="selectOpt(this)" name="mun" id="mun" required>
+                <option value="" hidden>Municipality/City</option>
+                <option <?php if ($mun == "Balanga City") {
+                            echo "selected";
+                        } ?> value="Balanga City">Balanga City</option>
+                <option <?php if ($mun == "Pilar") {
+                            echo "selected";
+                        } ?> value="Pilar">Pilar</option>
+                <option <?php if ($mun == "Orion") {
+                            echo "selected";
+                        } ?> value="Orion">Orion</option>
+            </select>
+        </form-control>
+        <form-control class="gr6-5">
+            <label>
+                <pre>Barangay: </pre>
+            </label>
+            <select id='brgySel' name="brgy" id="brgy" required>
+                <option value="" hidden>Barangay</option>
+                <?php
+                include '../data/address.php';
+                foreach ($brgy as $val) {
+                    echo "<option ";
+                    if ($brgy_ == strtoupper($val[1])) {
+                        echo "selected";
+                    }
+                    echo " id='" . $val[0] . "' class='opt_brgy' value='" . $val[1] . "'>" . $val[1] . "</option>";
+                }
+                ?>
+            </select>
+        </form-control>
+        <form-control class="gr7-1">
+            <label>
+                <pre>Address: </pre>
+            </label>
+            <input type="text" value="<?php if ($addr == ' ') {
+                                            echo "" . $addr;
+                                        } else {
+                                            echo "" . $address;
+                                        } ?>" id="addr" name="addr" required />
+        </form-control>
+
+        <form-control class="gr7-2">
+            <label>
+                <pre>Contact #: </pre>
+            </label>
+            <input type="text" value="<?php echo "" . $contact_; ?>" pattern="[0-9]{4}[-][0-9]{3}[-][0-9]{4}"
+                name="cnum" id="cnum" required />
+        </form-control>
+        <form-control class="gr7-3">
+            <label>
+                <pre>Email Address: </pre>
+            </label>
+            <input class="email" type="text" value="<?php echo "" . $email; ?>" name="email" id="email" required />
+        </form-control>
+
+        <span class="header1 gr1 bt_5">
+            <h2>Account Information</h2>
+        </span>
+        <form-control class="gr8-1">
+
+            <label>
+                <pre>Subscriber: </pre>
+            </label>
+            <select onchange="selectSubs(this)" name="subs" id="subs" required>
+                <option value="" hidden>SELECT SUBSCRIBER TYPE</option>
+                <option <?php if ($subs_type == "new") {
+                            echo "selected";
+                        } ?> value="new">NEW INSTALL</option>
+                <option <?php if ($subs_type == "cable") {
+                            echo "selected";
+                        } ?> value="cable">EXISTING CABLE ONLY</option>
+                <option <?php if ($subs_type == "docsis") {
+                            echo "selected";
+                        } ?> value="docsis">EXISTING DOCSIS</option>
+            </select>
+        </form-control>
+        <form-control class="gr8-2">
+            <label>
+                <pre>Installation: </pre>
+            </label>
+            <select id="install_type" onchange="selectInst(this)" name="install" required>
+                <option value="" hidden>SELECT INSTALLATION TYPE</option>
+                <option <?php if ($install_type == "catv") {
+                            echo "selected";
+                        } ?> style="display:none" id='newsub-1' value="catv">CABLE ONLY</option>
+                <option <?php if ($install_type == "netonly") {
+                            echo "selected";
+                        } ?> style="display:none" id='newsub-2' value="netonly">INTERNET ONLY</option>
+                <option <?php if ($install_type == "catvnet") {
+                            echo "selected";
+                        } ?> style="display:none" id='newsub-3' value="catvnet">CABLE AND INTERNET</option>
+                <option <?php if ($install_type == "fbr_catv") {
+                            echo "selected";
+                        } ?> style="display:none" id='existc-1' value="fbr_catv">UPGRADE TO FIBER CATV</option>
+                <option <?php if ($install_type == "fbr_catvnet") {
+                            echo "selected";
+                        } ?> style="display:none" id='exist-1' value="fbr_catvnet">UPGRADE TO FIBER </option>
+                <option <?php if ($install_type == "fbr_netonly") {
+                            echo "selected";
+                        } ?> style="display:none" id='exist-2' value="fbr_netonly">UPGRADE TO FIBER DISCO-CABLE
+                </option>
+            </select>
+        </form-control>
+        <form-control class="gr8-3">
+            <label>
+                <pre>Plan/Bundle: </pre>
+            </label>
+            <select id="plan_type" name="plan" required>
+                <option value="" hidden>SELECT PLAN/BUNDLE</option>
+                <?php
+                include '../include/db.inc.php';
+                $sql = "SELECT * FROM package_tbl";
+
+                $result = $con->query($sql);
+                if ($result->num_rows > 0) {
+                    while ($row = $result->fetch_assoc()) {
+                        echo "<option ";
+                        if ($plan == $row['code']) {
+                            echo "selected ";
+                        }
+                        echo "id='" . $row['code'] . "' style='display:none' value='" . $row['code'] . "'>" . $row['desc_'] . "</option>";
+                    }
+                }
+                mysqli_free_result($result);
+                $con->close();
+
+                ?>
+            </select>
+        </form-control>
+        <form-control class="gr8-4">
+            <label>
+                <pre>Lineman: </pre>
+            </label>
+            <input type="text" value="<?php echo "" . $lineman; ?>" name="lineman" id="lineman" required />
+        </form-control>
+
+        <span class="header1 gr1 bt_5">
+            <h2>Equipment Information</h2>
+        </span>
+        <form-control class="gr6-1">
+            <label>
+                <pre>ONU Model: </pre>
+            </label>
+            <select id="onu_model" name="onu_model" required>
+                <option value="" hidden>SELECT ONU MODEL</option>
+                <?php
+                include '../include/db.inc.php';
+                $sql = "SELECT * FROM onu_tbl";
+
+                $result = $con->query($sql);
+                if ($result->num_rows > 0) {
+                    while ($row = $result->fetch_assoc()) {
+                        echo "<option ";
+                        if ($onu_model == $row['code']) {
+                            echo "selected";
+                        }
+                        echo " id='" . $row['code'] . "'  value='" . $row['code'] . "'>" . $row['dec_'] . "</option>";
+                    }
+                }
+                mysqli_free_result($result);
+                $con->close();
+
+                ?>
+            </select>
+        </form-control>
+        <form-control class="gr6-2">
+            <label>
+                <pre>IP Address: </pre>
+            </label>
+            <input type="text" value="<?php echo "" . $ip_address; ?>" name="ip" id="ip" required />
+        </form-control>
+        <form-control class="gr6-3">
+            <label>
+                <pre>MAC Address: </pre>
+            </label>
+            <input type="text" value="<?php echo "" . $mac_address; ?>" name="mac" id="mac" required />
+        </form-control>
+        <form-control class="gr6-4">
+            <label>
+                <pre>SERIAL #: </pre>
+            </label>
+            <input type="text" value="<?php echo "" . $serial; ?>" name="serial" id="serial" required />
+        </form-control>
+        <form-control class="gr6-5">
+            <label>
+                <pre>Box #: </pre>
+            </label>
+            <input type="number" value="<?php echo "" . $box; ?>" name="boxn" id="boxn" required />
+        </form-control>
+        <form-control class="gr6-1">
+            <label>
+                <pre>Card #: </pre>
+            </label>
+            <input type="number" value="<?php echo "" . $card; ?>" name="cardn" id="cardn" required />
+        </form-control>
+        <form-control class="gr6-2">
+            <label>
+                <pre>Wire: </pre>
+            </label>
+            <select name="wr_type" required>
+                <option value="" hidden>SELECT WIRE</option>
+                <option <?php if ($wr_type == 'FBR') {
+                            echo "selected";
+                        } ?> value="fbr">FIBER WIRE</option>
+                <option <?php if ($wr_type == 'COAX') {
+                            echo "selected";
+                        } ?> value="coax">COAXIAL WIRE</option>
+            </select>
+        </form-control>
+        <form-control class="gr6-3">
+            <label>
+                <pre>Wire Start: </pre>
+            </label>
+            <input type="number" value="<?php echo "" . $wr_start; ?>" name="wrStr" id="wrStr" required />
+        </form-control>
+        <form-control class="gr6-4">
+            <label>
+                <pre>Wire End: </pre>
+            </label>
+            <input type="number" value="<?php echo "" . $wr_end; ?>" name="wrEnd" id="wrEnd" required />
+        </form-control>
+        <form-control class="gr6-5">
+            <label>
+                <pre>NAP #: </pre>
+            </label>
+            <input type="text" value="<?php echo "" . $nap; ?>" name="nap" id="nap" required />
+        </form-control>
+        <form-control class="gr6-1">
+            <label>
+                <pre>Slot #: </pre>
+            </label>
+            <input type="number" value="<?php echo "" . $slot; ?>" name="slot" id="slot" required />
+        </form-control>
+        <form-control class="gr6-2">
+            <label>
+                <pre>Layer: </pre>
+            </label>
+            <input type="text" value="<?php echo "" . $layer; ?>" name="layer" id="layer" required />
+        </form-control>
+        <form-control class="gr6-3">
+            <label>
+                <pre>LCP #: </pre>
+            </label>
+            <input type="text" value="<?php echo "" . $lcp; ?>" name="lcp" id="lcp" required />
+        </form-control>
+        <form-control class="gr6-4">
+            <label>
+                <pre>OLT #: </pre>
+            </label>
+            <input type="number" value="<?php echo "" . $olt; ?>" name="olt" id="olt" required />
+        </form-control>
+        <form-control class="gr6-5">
+            <label>
+                <pre>GPON #: </pre>
+            </label>
+            <input type="text" value="<?php echo "" . $gpon; ?>" name="gpon" id="gpon" required />
+        </form-control>
+        <br />
+
+        <span class="header1 gr1 bt_5">
+            <h2>History</h2>
+        </span>
+        <div class="table-responsive gr1 historyTBL">
             <table id="history_list" class="stripe cell-border row-border hover compact" style="width:100%">
                 <thead class="thead">
                     <tr>
@@ -76,260 +314,26 @@
                     </tr>
                 </thead>
                 <tbody>
-                <?php
-                if ($resu->num_rows > 0) {
-                    while ($row3 = $resu->fetch_assoc()) {
-                       echo"
+                    <?php
+                    if ($resu->num_rows > 0) {
+                        while ($row3 = $resu->fetch_assoc()) {
+                            echo "
                        <tr>
-                        <th>".$row3['uid_']."</th>
-                        <th>".$row3['history']."</th>
-                        <th>".$row3['remarks']."</th>
-                        <th>".$row3['user_id']."</th>
-                        <th>".$row3['date']."</th>
+                        <th>" . $row3['uid_'] . "</th>
+                        <th>" . $row3['history'] . "</th>
+                        <th>" . $row3['remarks'] . "</th>
+                        <th>" . $row3['user_id'] . "</th>
+                        <th>" . $row3['date'] . "</th>
                         </tr>
                        ";
+                        }
+                    } else {
                     }
-                }else{
-
-                }
-            mysqli_free_result($resu);
-                ?>
+                    mysqli_free_result($resu);
+                    ?>
                 </tbody>
             </table>
         </div>
-        </div>
-    </div>
-    
-<script src="https://kit.fontawesome.com/1eec2efa50.js" crossorigin="anonymous"></script>
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/pdfmake.min.js"></script>
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/vfs_fonts.js"></script>
-<script type="text/javascript"
-    src="https://cdn.datatables.net/v/dt/jqc-1.12.4/jszip-2.5.0/dt-1.12.1/af-2.4.0/b-2.2.3/b-colvis-2.2.3/b-html5-2.2.3/b-print-2.2.3/cr-1.5.6/date-1.1.2/fc-4.1.0/fh-3.2.4/kt-2.7.0/r-2.3.0/rg-1.2.0/rr-1.2.8/sc-2.0.7/sb-1.3.4/sp-2.0.2/sl-1.4.0/sr-1.1.1/datatables.min.js">
-</script>
-<script>
-$(document).ready(function() {
-    var t = $('#history_list').DataTable({
-        stateSave: true,
-        dom: 'Blfrtip',
-        buttons: {
-            "dom": {
-                "button": {
-                    "tag": "button",
-                    "className": "exportBtn _btn"
-                }
-            },
-            "buttons": ['excelHtml5', 'print']
-        },
-        lengthMenu: [
-            [10, 25, 50, 100, 1000, -1],
-            [10, 25, 50, 100, 1000, 'All']
-        ],
-        "language": {
-            processing: '<br/><br/><br/><br/>',
-        },
-        scrollY: "320px",
-        scrollCollapse: true,
-        columnDefs: [{
-            "className": "dt-center",
-            "targets": "_all"
-
-        }
-        // , {
-        //     searchable: false,
-        //     orderable: false,
-        //     targets: [0, 11],
-        // }, ],
-        // order: [
-        //     [1, 'asc']
-        ]
-    });
-
-    // t.on('order.dt search.dt', function() {
-    //     let i = 1;
-    //     t.cells(null, 0, {
-    //         search: 'applied',
-    //         order: 'applied'
-    //     }).every(function(cell) {
-    //         this.data(i++);
-    //     });
-    // }).draw();
-});
-
-
-function selectInst(el) {
-
-
-    
-    $('#plan_type').val('').trigger('change');
-    if (el.value == 'catv' || el.value == 'fbr_catv') {
-        $('#plan_type').prop('disabled', 'disabled');
-        $('#boxn').prop('disabled', false);
-        $('#cardn').prop('disabled', false);
-        $('#ip').prop('disabled', 'disabled');
-        $('#mac').prop('disabled', 'disabled');
-        $('#serial').prop('disabled', 'disabled');
-        $('#onu_model').prop('disabled', 'disabled');
-        $('#nap').prop('disabled', 'disabled');
-        $('#slot').prop('disabled', 'disabled');
-        $('#layer').prop('disabled', 'disabled');
-        $('#lcp').prop('disabled', 'disabled');
-        $('#olt').prop('disabled', 'disabled');
-        $('#gpon').prop('disabled', 'disabled');
-    $('#ip').val('').trigger('change');
-    $('#mac').val('').trigger('change');
-    $('#serial').val('').trigger('change');
-    $('#nap').val('').trigger('change');
-    $('#slot').val('').trigger('change');
-    $('#layer').val('').trigger('change');
-    $('#lcp').val('').trigger('change');
-    $('#lcp').val('').trigger('change');
-    $('#gpon').val('').trigger('change');
-
-        document.getElementById("bundle-1").style.display = "none";
-        document.getElementById("bundle-2").style.display = "none";
-        document.getElementById("bundle-3").style.display = "none";
-        document.getElementById("bundle-4").style.display = "none";
-        document.getElementById("bundle-5").style.display = "none";
-        document.getElementById("bundle-6").style.display = "none";
-        document.getElementById("inetOnly-1").style.display = "none";
-        document.getElementById("inetOnly-2").style.display = "none";
-        document.getElementById("inetOnly-3").style.display = "none";
-
-    }
-    if (el.value == 'netonly' || el.value == 'fbr_netonly') {
-        $('#plan_type').prop('disabled', false);
-        document.getElementById("bundle-1").style.display = "none";
-        document.getElementById("bundle-2").style.display = "none";
-        document.getElementById("bundle-3").style.display = "none";
-        document.getElementById("bundle-4").style.display = "none";
-        document.getElementById("bundle-5").style.display = "none";
-        document.getElementById("bundle-6").style.display = "none";
-        document.getElementById("inetOnly-1").style.display = "flex";
-        document.getElementById("inetOnly-2").style.display = "flex";
-        document.getElementById("inetOnly-3").style.display = "flex";
-        $('#boxn').prop('disabled', 'disabled');
-        $('#cardn').prop('disabled', 'disabled');
-        $('#ip').prop('disabled',  false);
-        $('#mac').prop('disabled',  false);
-        $('#serial').prop('disabled',  false);
-        $('#onu_model').prop('disabled', false);
-        $('#nap').prop('disabled',  false);
-        $('#slot').prop('disabled',  false);
-        $('#layer').prop('disabled',  false);
-        $('#lcp').prop('disabled',  false);
-        $('#olt').prop('disabled',  false);
-        $('#gpon').prop('disabled', false);
-    $('#boxn').val('').trigger('change');
-    $('#cardn').val('').trigger('change');
-    }
-    if (el.value == 'catvnet' || el.value == 'fbr_catvnet') {
-        $('#plan_type').prop('disabled', false);
-        document.getElementById("bundle-1").style.display = "flex";
-        document.getElementById("bundle-2").style.display = "flex";
-        document.getElementById("bundle-3").style.display = "flex";
-        document.getElementById("bundle-4").style.display = "flex";
-        document.getElementById("bundle-5").style.display = "flex";
-        document.getElementById("bundle-6").style.display = "flex";
-        document.getElementById("inetOnly-1").style.display = "none";
-        document.getElementById("inetOnly-2").style.display = "none";
-        document.getElementById("inetOnly-3").style.display = "none";
-        $('#boxn').prop('disabled', false);
-        $('#cardn').prop('disabled', false);
-        $('#ip').prop('disabled',  false);
-        $('#mac').prop('disabled',  false);
-        $('#serial').prop('disabled',  false);
-        $('#onu_model').prop('disabled', false);
-        $('#nap').prop('disabled',  false);
-        $('#slot').prop('disabled',  false);
-        $('#layer').prop('disabled',  false);
-        $('#lcp').prop('disabled',  false);
-        $('#olt').prop('disabled',  false);
-        $('#gpon').prop('disabled', false);
-    }
-
-}
-
-function selectSubs(el) {
-    $('#install_type').val('').trigger('change');
-
-    if (el.value == 'new') {
-        document.getElementById("newsub-1").style.display = "flex";
-        document.getElementById("newsub-2").style.display = "flex";
-        document.getElementById("newsub-3").style.display = "flex";
-        document.getElementById("existc-1").style.display = "none";
-        document.getElementById("exist-1").style.display = "none";
-        document.getElementById("exist-2").style.display = "none";
-    }
-    if (el.value == 'cable') {
-        document.getElementById("newsub-1").style.display = "none";
-        document.getElementById("newsub-2").style.display = "none";
-        document.getElementById("newsub-3").style.display = "none";
-        document.getElementById("existc-1").style.display = "flex";
-        document.getElementById("exist-1").style.display = "flex";
-        document.getElementById("exist-2").style.display = "flex";
-    }
-    if (el.value == 'docsis') {
-        document.getElementById("newsub-1").style.display = "none";
-        document.getElementById("newsub-2").style.display = "none";
-        document.getElementById("newsub-3").style.display = "none";
-        document.getElementById("existc-1").style.display = "none";
-        document.getElementById("exist-1").style.display = "flex";
-        document.getElementById("exist-2").style.display = "flex";
-    }
-        $('#plan_type').prop('disabled', false);
-        document.getElementById("bundle-1").style.display = "none";
-        document.getElementById("bundle-2").style.display = "none";
-        document.getElementById("bundle-3").style.display = "none";
-        document.getElementById("bundle-4").style.display = "none";
-        document.getElementById("bundle-5").style.display = "none";
-        document.getElementById("bundle-6").style.display = "none";
-        document.getElementById("inetOnly-1").style.display = "none";
-        document.getElementById("inetOnly-2").style.display = "none";
-        document.getElementById("inetOnly-3").style.display = "none";
-}
-
-function selectOpt(el) {
-    $('#brgySel').val('').trigger('change');
-    if (el.value == 'BALANGA CITY') {
-        for (var a = 1; a <= 25; a++) {
-            document.getElementById("bal-" + a).classList.remove("opt_brgy");
-        }
-        for (var b = 1; b <= 23; b++) {
-            document.getElementById("ori-" + b).classList.add("opt_brgy");
-        }
-        for (var c = 1; c <= 19; c++) {
-            document.getElementById("ori-" + c).classList.add("opt_brgy");
-        }
-    }
-    if (el.value == 'PILAR') {
-        for (var a = 1; a <= 25; a++) {
-            document.getElementById("bal-" + a).classList.add("opt_brgy");
-        }
-        for (var b = 1; b <= 23; b++) {
-            document.getElementById("ori-" + b).classList.add("opt_brgy");
-        }
-        for (var c = 1; c <= 19; c++) {
-            document.getElementById("pil-" + c).classList.remove("opt_brgy");
-        }
-    }
-    if (el.value == 'ORION') {
-        for (var a = 1; a <= 25; a++) {
-            document.getElementById("bal-" + a).classList.add("opt_brgy");
-        }
-        for (var b = 1; b <= 23; b++) {
-            document.getElementById("ori-" + b).classList.remove("opt_brgy");
-        }
-        for (var c = 1; c <= 19; c++) {
-            document.getElementById("pil-" + c).classList.add("opt_brgy");
-        }
-    }
-}
-    function showSubs(a){
-        document.getElementById("subDoc").style.display ="flex";
-        sessionStorage.setItem('subs_id',a);
-    }
-
-    function hideSubs(){
-        window.location.href='../pages/dashboard.php'
-    }
-</script>
+    </form>
+</div>
+<?php include '../js/subsInfo.js.php';
