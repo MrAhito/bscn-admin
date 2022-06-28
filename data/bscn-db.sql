@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 25, 2022 at 10:20 AM
+-- Generation Time: Jun 28, 2022 at 10:03 AM
 -- Server version: 10.4.22-MariaDB
 -- PHP Version: 8.1.0
 
@@ -62,15 +62,15 @@ CREATE TABLE `package_tbl` (
 --
 
 INSERT INTO `package_tbl` (`uid_`, `code`, `desc_`, `value`) VALUES
-(1, 'bundle-1', 'Bundle 1 - 15Mbps iNet+CATV', '1350'),
-(2, 'bundle-2', 'Bundle 2 - 30Mbps iNet+CATV', '1600'),
-(3, 'bundle-3', 'Bundle 3 - 50Mbps iNet+CATV', '1750'),
-(4, 'bundle-4', 'Bundle 4 - 100Mbps iNet+CATV', '1850'),
-(5, 'bundle-5', 'Bundle 5 - 250Mbps iNet+CATV', '2600'),
-(6, 'bundle-6', 'Bundle 6 - 350Mbps iNet+CATV', '3100'),
-(7, 'inetOnly-1', 'iNet Only - 100Mbps Fiber', '1500'),
-(8, 'inetOnly-2', 'iNet Only - 250Mbps Fiber', '2250'),
-(9, 'inetOnly-3', 'iNet Only - 350Mbps Fiber', '2750');
+(1, 'bundle-1', '15Mbps Fibr iNet+CATV', '1350'),
+(2, 'bundle-2', '30Mbps Fibr iNet+CATV', '1600'),
+(3, 'bundle-3', '50Mbps Fibr iNet+CATV', '1750'),
+(4, 'bundle-4', '100Mbps Fibr iNet+CATV', '1850'),
+(5, 'bundle-5', '250Mbps Fibr iNet+CATV', '2600'),
+(6, 'bundle-6', '350Mbps Fibr iNet+CATV', '3100'),
+(7, 'inetOnly-1', '100Mbps Fibr iNet', '1500'),
+(8, 'inetOnly-2', '250Mbps Fibr iNet', '2250'),
+(9, 'inetOnly-3', '350Mbps Fibr iNet', '2750');
 
 -- --------------------------------------------------------
 
@@ -4913,7 +4913,7 @@ INSERT INTO `subs_info_tbl` (`uid_`, `status`, `fname`, `mname`, `lname`, `conta
 (1292, 1, 'MA. LOURDES', 'MENDOZA', 'CRUZ', '0977-821-2228', '', '#110 JOSEFAVILLE PANILAO PILAR', '172.16.175.98', '984562EF41F9', '', '', '', 'NEW INSTALL INTERNET ONLY / ONU MODEL 2FC-S', '', '', '1500', 'ERIC/IAN', '2020-10-26', '2022-01-25', '2022-01-25'),
 (1293, 1, 'HANAH MAE', 'GANADEN', 'TAPAT', '0917-661-5134', 'DISCONNECT CABLE 04/12/2022', '#DOOR 4 SAMPAGUITA ST. DFS', '172.16.247.172', '984562EF4409', '', '', '', 'NEW INSTALL CABLE INTERNET / UNO MODEL 2FC-S', '', '', '1500', 'RONNIE/MAKI', '2020-10-26', '2021-03-25', '2021-03-25'),
 (1294, 1, 'JONATHAN', 'VALDOZ', 'REPOTENTE', '0949-966-1515', 'OLD NAME: GLORIA ASPIRAS', 'AUSTRIA SUBD., CENTRAL', '172.16.1.82', '984562E1BB0C', '', '', '', 'WARRANTY REPLACEMENT / ONU MODEL 2FC-S', '', '', '1500', 'ROMMER', '2020-10-26', '2021-06-25', '2021-06-28'),
-(1295, 0, 'RAYMUNDA', 'PANGILINAN', 'BOQUIREN', '0949-678-1469', '', 'NAVAL ST. CUPANG PROPER', '172.16.247.202', '984562EF4C79', '', '', '', 'NEW INSTALL CABLE INTERNET / UNO MODEL 2FC-S', '', '', '1000', 'RONNIE/MAKI', '2020-10-26', NULL, '2021-09-30'),
+(1295, 0, 'RAYMUNDA', 'PANGILINAN', 'BOQUIREN', '0949-678-1469', '', 'NAVAL ST.', '172.16.247.202', '984562EF4C79', 'Balanga City', 'Cupang Proper', 'NAVAL ST.', 'New Install Cable and Internet', 'new', 'catvnet', 'bundle-1', 'RONNIE/MAKI', '2020-10-26', NULL, '2021-09-30'),
 (1296, 1, 'EMERSON', 'BRESINIO', 'ATIBAGOS', '0945-186-4133', '', '#678 SITIO UGONG CATANING', '172.16.247.170', '984562E1DFBC', '', '', '', 'NEW INSTALL INTERNET ONLY / ONU MODEL 2FC-S', '', '', '1500', 'ERICK/IAN', '2020-10-26', '2022-06-25', NULL),
 (1297, 1, 'ALEXANDER', 'C.', 'BACLIG', '0920-946-0185', '', '#437 T.CAMACHO ST. CAMACHO', '172.16.247.167', '984562E1E53C', '', '', '', 'TRANSFER TO FIBER / ONU MODEL 2FC-S', '', '', '1500', 'MAC/TONTON', '2020-10-26', '2021-04-27', '2021-04-27'),
 (1298, 1, 'FELICIDAD', 'ORIA', 'EBON', '0929-190-2927', '', '#128 MANRIQUE ST. DAAN BAGO ORION', '172.16.247.166', '984562E1E5AC', '', '', '', 'TRANSFER TO FIBER / ONU MODEL 2FC-S', '', '', '1500', 'JAYSON/JEEBOY', '2020-10-26', '2022-06-25', NULL),
@@ -7077,7 +7077,7 @@ INSERT INTO `subs_info_tbl` (`uid_`, `status`, `fname`, `mname`, `lname`, `conta
 (3444, 1, 'MELANIE', 'PIZARRO', 'SEVILLA', '0936-965-9755', '', 'ADELFA ST. VENZON SUBD. CUPANG NORTH', '172.16.182.130', 'SKYW11E7B16D', '', '', '', 'REPLACEMENT SALES / ONU MODEL SKYWORTH', '', '', '1500', 'JOEY/OCA', '2022-06-22', '2022-06-25', NULL),
 (3445, 1, 'MYLENE', 'GAPATIN', 'BASUEL', '0947-891-5221', '', 'LOT 12 BLK 4 CANYON RIDGE SUBD. TENEJERO', '172.16.182.131', 'SKYW11E7B195', '', '', '', 'TRANSFER TO FIBER - CABLE CONNECTED TO FIBER LINE / ONU SKYWORTH', '', '', '1250', 'RONNIE/CRIS', '2022-06-22', '2022-06-25', NULL),
 (3446, 1, 'BILLY RAY', 'GILONGOS', 'OYANIB', '0920-500-1754', '', 'BLK 6 LOT 4 CANYON RIDGE SUBD. TENEJERO', '172.16.182.132', 'SKYW11E7ACBD', '', '', '', 'TRANSFER TO FIBER - CABLE CONNECTED TO FIBER LINE / ONU SKYWORTH', '', '', '1500', 'RONNIE/CRIS', '2022-06-22', '2022-06-25', NULL),
-(3447, 0, 'ELMER', 'GANZON', 'BARTOLINI', '0917-638-3704', 'DOUBLE THE BANDWIDTH', '#278 BANZON ST. CENTRAL CUPANG', '172.16.182.133', 'SKYW11E81FAD', '', '', '', 'REPLACEMENT SALES / ONU MODEL SKYWORTH', '', '', '1750', 'JOJO/JOEY', '2022-06-23', '2022-06-25', NULL),
+(3447, 1, 'ELMER', 'GANZON', 'BARTOLINI', '0917-638-3704', 'DOUBLE THE BANDWIDTH', '#278 BANZON ST. CENTRAL CUPANG', '172.16.182.133', 'SKYW11E81FAD', '', '', '', 'REPLACEMENT SALES / ONU MODEL SKYWORTH', '', '', '1750', 'JOJO/JOEY', '2022-06-23', '2022-06-25', NULL),
 (3448, 1, 'AUDRELYN', 'TRANATE', 'REYES', '0947-818-9594', '', '#13 SAN ANTONIO TENEJERO', '172.16.182.134', 'SKYW11E7B815', '', '', '', 'NEW INSTALL CABLE INTERNET / ONU MODEL SKYWORTH', '', '', '1500', 'RONNIE/CRIS', '2022-06-23', '2022-06-25', NULL),
 (3449, 1, 'JESUS', 'ZABALA', 'REYES JR.', '0920-214-6114', '', 'LOT 33 BLK 6 HILLCREST EXECUTIVE CATANING', '172.16.182.137', 'SKYW11E813D5', '', '', '', 'NEW INSTALL INTERNET ONLY / ONU MODEL SKYWORTH', '', '', '1500', 'JOEY/OCA', '2022-06-23', '2022-06-25', NULL),
 (3450, 1, 'MELANIE', 'MEDINA', 'TIGAS', '09189007642', '', '#522 ILANG ILANG ST., BRGY SAN JOSE', '172.16.182.138', 'SKYW11E7C475', '', '', '', 'NEW INSTALL CABLE WITH INTERNET', '', '', '1500', 'RONNIE/CRIS', '2022-06-23', '2022-06-25', NULL),
