@@ -10,7 +10,7 @@
 
 .inf_ {
     grid-template-columns: repeat(22, 1fr);
-    row-gap: 12px;
+    row-gap: 15px;
 
 }
 

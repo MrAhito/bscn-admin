@@ -18,6 +18,7 @@ include_once '../components/navBar.php';
 if(isset($_SESSION['view']) == 'info'){
     include_once '../styles/addSubs.style.php';
     include_once '../include/fetchSubsdata.inc.php';
+    include_once '../components/remarks.php';
     include_once '../components/subsInfo.php';
 }else{
     include_once '../styles/addSubs.style.php';

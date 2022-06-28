@@ -1,4 +1,10 @@
-<?php include_once '../styles/navBar.style.php'; ?>
+<?php
+if (!isset($_SESSION['code'])) {
+    header("location: log-in.php");
+    exit();
+}
+
+include_once '../styles/navBar.style.php'; ?>
 
 <nav class="nav_bar">
     <div class="ic_nav">

@@ -18,6 +18,7 @@
                         <th>MAC</th>
                         <th>Date Installed</th>
                         <th>Type</th>
+                        <th>Plan</th>
                         <th>Operations</th>
                     </tr>
                 </thead>

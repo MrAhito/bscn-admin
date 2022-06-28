@@ -23,7 +23,13 @@ $columns = array(
     array('db' => 'mname',   'dt' => 4),
     array('db' => 'contact_',     'dt' => 5),
     array('db' => 'address',     'dt' => 6),
-    array('db' => 'ip_address',     'dt' => 7),
+    array(
+        'db'        => 'ip_address',
+        'dt'        => 7,
+        'formatter' => function ($d, $row) {
+            return "<a href='http://".$d."' rel='noopener noreferrer' target='_blank'>" . $d . "</a>";
+        }
+    ),
     array('db' => 'mac_address',     'dt' => 8),
     array(
         'db'        => 'date_installed',
@@ -34,8 +40,31 @@ $columns = array(
     ),
     array('db' => 'type',     'dt' => 10),
     array(
-        'db'        => 'uid_',
+        'db'        => 'plan',
         'dt'        => 11,
+        'formatter' => function ($d, $row) {
+            
+            
+            include '../include/db.inc.php';
+            $sql = "SELECT * FROM package_tbl";
+            $result = $con->query($sql);
+            if ($result->num_rows > 0) {
+                while ($row = $result->fetch_assoc()) {
+                    if($d == $row['code']){
+                        $d = $row['desc_'];
+                    }
+                }
+                return $d;
+            }else{
+                return $d;
+            }
+            mysqli_free_result($result);
+            $con->close();
+        }
+    ),
+    array(
+        'db'        => 'uid_',
+        'dt'        => 12,
         'formatter' => function ($d, $row) {
             $a = '';
             $b = '';

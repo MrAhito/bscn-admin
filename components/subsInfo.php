@@ -3,7 +3,7 @@
     <div class="add_head inf_head">
         <a href="../include/optRoutes.inc.php?route=''&id=''"><i class="fas fa-arrow-left"></i> Subscribers List</a>
     </div>
-    <form class="form_add inf_" id='formAdd'>
+    <form class="form_add inf_" id='formAdd' method="POST" action="../include/subsUpdate.inc.php">
         <span class="header1 gr1">
             <h2>Personal Information</h2>
             <div class="divEdit sinBtn showInfBtn   ">
@@ -92,7 +92,7 @@
             <label>
                 <pre>Email Address: </pre>
             </label>
-            <input class="email" type="text" value="<?php echo "" . $email; ?>" name="email" id="email" required />
+            <input class="email" type="text" value="<?php echo "" . $email; ?>" name="email" id="email" />
         </form-control>
 
         <span class="header1 gr1 bt_5">
@@ -277,7 +277,7 @@
             <label>
                 <pre>Layer: </pre>
             </label>
-            <input type="text" value="<?php echo "" . $layer; ?>" name="layer" id="layer" required />
+            <input type="text" value="<?php echo "" . $layer; ?>" name="layer" id="layer" />
         </form-control>
         <form-control class="gr6-3">
             <label>
