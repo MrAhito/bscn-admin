@@ -62,7 +62,7 @@
                 include '../data/address.php';
                 foreach ($brgy as $val) {
                     echo "<option ";
-                    if ($brgy_ == strtoupper($val[1])) {
+                    if ($brgy_ == $val[1]) {
                         echo "selected";
                     }
                     echo " id='" . $val[0] . "' class='opt_brgy' value='" . $val[1] . "'>" . $val[1] . "</option>";
@@ -74,10 +74,10 @@
             <label>
                 <pre>Address: </pre>
             </label>
-            <input type="text" value="<?php if ($addr == ' ') {
-                                            echo "" . $addr;
-                                        } else {
+            <input type="text" value="<?php if ($addr == '') {
                                             echo "" . $address;
+                                        } else {
+                                            echo "" . $addr;
                                         } ?>" id="addr" name="addr" required />
         </form-control>
 
@@ -110,7 +110,7 @@
                         } ?> value="new">NEW INSTALL</option>
                 <option <?php if ($subs_type == "cable") {
                             echo "selected";
-                        } ?> value="cable">EXISTING CABLE ONLY</option>
+                        } ?> value="cable">EXISTING CABLE</option>
                 <option <?php if ($subs_type == "docsis") {
                             echo "selected";
                         } ?> value="docsis">EXISTING DOCSIS</option>
@@ -173,7 +173,19 @@
             <label>
                 <pre>Lineman: </pre>
             </label>
-            <input type="text" value="<?php echo "" . $lineman; ?>" name="lineman" id="lineman" required />
+            <input type="text" value="<?php echo "" . $lineman; ?>" name="lineman" id="lineman" />
+        </form-control>
+        <form-control class="gr6-1">
+            <label>
+                <pre>Date Disconnected: </pre>
+            </label>
+            <input type="date" value="<?php echo "" . $disco; ?>" name="disco" id="disco" />
+        </form-control>
+        <form-control class="gr6-2">
+            <label>
+                <pre>Date Reconnected: </pre>
+            </label>
+            <input type="date" value="<?php echo "" . $recon; ?>" name="recon" id="recon" />
         </form-control>
 
         <span class="header1 gr1 bt_5">
@@ -241,10 +253,10 @@
             </label>
             <select name="wr_type" required>
                 <option value="" hidden>SELECT WIRE</option>
-                <option <?php if ($wr_type == 'FBR') {
+                <option <?php if ($wr_type == 'fbr') {
                             echo "selected";
                         } ?> value="fbr">FIBER WIRE</option>
-                <option <?php if ($wr_type == 'COAX') {
+                <option <?php if ($wr_type == 'coax') {
                             echo "selected";
                         } ?> value="coax">COAXIAL WIRE</option>
             </select>

@@ -5,16 +5,16 @@ include '../include/db.inc.php';
 if(isset($_SESSION['code']) && isset($_POST['submit'])){
 // print_r($_POST);
 // Personal Info
-$lname = strtoupper($_POST['lname']);
-$fname = strtoupper($_POST['fname']);
-$mname = strtoupper($_POST['mname']);
-$addr = strtoupper($_POST['addr']);
-$brgy = strtoupper($_POST['brgy']);
-$mun = strtoupper($_POST['mun']);
+$lname = $_POST['lname'];
+$fname = $_POST['fname'];
+$mname = $_POST['mname'];
+$addr = $_POST['addr'];
+$brgy = $_POST['brgy'];
+$mun = $_POST['mun'];
 $address = $addr . ", ". $brgy.", ".$mun;
-$cnum = strtoupper($_POST['cnum']);
-$lineman = strtoupper($_POST['lineman']);
-$wr_type = strtoupper($_POST['wr_type']);
+$cnum = $_POST['cnum'];
+$lineman = $_POST['lineman'];
+$wr_type = $_POST['wr_type'];
 $wrStr = $_POST['wrStr'];
 $wrEnd = $_POST['wrEnd'];
 $ip='';
@@ -38,27 +38,26 @@ $b_type = ' ';
 $c_type = ' ';
 
 if($subs == "new"){
-    $a_type = 'New Install';
+    $a_type = 'NEW INSTALL';
 }else if($subs == "cable"){
-    $a_type = 'Existing Cable';
+    $a_type = 'EXISTING CABLE';
 }else if($subs == "docsis"){
-    $a_type = 'Existing DOCSIS';
+    $a_type = 'EXISTING DOCSIS';
 }
 
 if($install == 'catv'){
-    $b_type = "Cable Only";
+    $b_type = "CABLE ONLY";
 }else if($install == 'netonly'){
-    $b_type = "Internet Only";
+    $b_type = "INTERNET ONLY";
 }else if($install == 'catvnet'){
-    $b_type = "Cable and Internet";
+    $b_type = "CABLE AND INTERNET";
 }else if($install == 'fbr_catv'){
-    $b_type = "Upgrade to Digital Box";
+    $b_type = "UPGRADE TO DIGITAL BOX";
 }else if($install == 'fbr_netonly'){
-    $b_type = "Upgrade to Fiber DISCO-CATV";
+    $b_type = "UPGRADE TO FIBER DISCO-CATV";
 }else if($install == 'fbr_catvnet'){
-    $b_type = "Upgrade to Fiber";
+    $b_type = "UPGRADE TO FIBER";
 }
-
 $c_type = $a_type ." ".$b_type;
 
 // Equipments Info

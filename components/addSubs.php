@@ -84,7 +84,7 @@
                 <select onchange="selectSubs(this)" name="subs" required>
                     <option value="" hidden>SELECT SUBSCRIBER TYPE</option>
                     <option value="new">NEW INSTALL</option>
-                    <option value="cable">EXISTING CABLE ONLY</option>
+                    <option value="cable">EXISTING CABLE</option>
                     <option value="docsis">EXISTING DOCSIS</option>
                 </select>
             </form-control>

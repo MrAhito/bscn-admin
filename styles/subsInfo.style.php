@@ -135,15 +135,15 @@
 }
 
 .canc {
-    background-color: var(--primary);
-    color: var(--secondary);
-    transition: .3s all ease-in-out;
-}
-
-.canc:hover {
     border-color: var(--red);
     background-color: var(--red);
     color: var(--primary);
-    transition: .3s all ease-in-out;
+    transition: .3s all ease-in-out
+}
+
+.canc:hover {
+    background-color: var(--primary);
+    color: var(--secondary);
+    transition: .3s all ease-in-out;;
 }
 </style>

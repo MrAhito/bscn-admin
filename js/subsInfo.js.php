@@ -241,10 +241,10 @@ function cancelInputs() {
     $('#lname').val(<?php echo "'" . $lname . "'" ?>);
     $('#fname').val(<?php echo "'" . $fname . "'" ?>);
     $('#mname').val(<?php echo "'" . $mname . "'" ?>);
-    if (<?php echo "'" . $addr . "'" ?> == ' ') {
-        $('#addr').val(<?php echo "'" . $addr . "'" ?>);
-    } else {
+    if (<?php echo "'" . $addr . "'" ?> == '') {
         $('#addr').val(<?php echo "'" . $address . "'" ?>);
+    } else {
+        $('#addr').val(<?php echo "'" . $addr . "'" ?>);
     }
     $('#cnum').val(<?php echo "'" . $contact_ . "'" ?>);
     $('#email').val(<?php echo "'" . $email . "'" ?>);

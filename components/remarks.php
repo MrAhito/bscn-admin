@@ -83,7 +83,6 @@ background-color: var(--tertiary);
         array($mname,"Middle Name"),
         array($lname,"Last Name"),
         array($contact_,"Contact Number"),
-        array($email, "Email Address"),
         array($ip_address,"IP"),
         array($mac_address,"MAC"),
         array($mun,"Municipal/City"),
@@ -95,28 +94,18 @@ background-color: var(--tertiary);
         array($lineman,"Lineman"),
         array($serial,"Serial"),
         array($onu_model,"Onu Model"),
-        array($nap,"NAP"),
-        array($slot,"Slot"),
-        array($layer,"Layer"),
         array($lcp,"LCP"),
         array($olt,"OLT"),
         array($gpon,"GPON"),
-        array($wr_type,"Wire Type"),
-        array($wr_start,"Wire Start"),
-        array($wr_end,"Wire End"),
-        array($box,"Box #"),
-        array($card,"Card #")
     );
+    if($install_type != 'netonly' || $install_type != 'fbr_netonly'){
+        array_push($arrVal, array($box,"Box #"));
+        array_push($arrVal, array($card,"Card #"));
+    }
     $arr = array();
     foreach($arrVal as $item){
         if($item[0] == '' || $item[0] == 0){
-            if($item[0] == 'netonly' || $item[0] == 'fbr_netonly' ){
-                if($item[1] != "Box #" && $item[1] != "Card #"){
-                    array_push($arr, $item[1]);
-                }
-            }else{
                 array_push($arr, $item[1]);
-            }
         }
     }
     // if($brgy_ == ''){

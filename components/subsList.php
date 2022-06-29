@@ -35,7 +35,7 @@
         
 $(document).ready(function() {
     var t = $('#subscribers_list').DataTable({
-        stateSave: true, 
+        // stateSave: true, 
         responsive: true,
         info: "true",
         dom: 'Blfrtip',
@@ -49,9 +49,10 @@ $(document).ready(function() {
             "buttons": ['excelHtml5', 'print']
         },
         lengthMenu: [
-            [10, 25, 50, 100, 1000, -1],
-            [10, 25, 50, 100, 1000, 'All']
+            [25, 50, 100, 1000, -1],
+            [25, 50, 100, 1000, 'All']
         ],
+        pageLength:25,
         "language": {
             processing: '<br/><br/><br/><br/>'
         },
@@ -64,7 +65,7 @@ $(document).ready(function() {
         }, {
             searchable: false,
             orderable: false,
-            targets: [0, 11],
+            targets: [0, 12],
         }, ],
         order: [
             [1, 'asc']

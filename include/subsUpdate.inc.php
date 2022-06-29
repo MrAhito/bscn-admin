@@ -7,7 +7,7 @@
     $mname = $_POST['mname'];
     $cnum = $_POST['cnum'];
     $email = $_POST['email'];
-    $address = $_POST['addr'];
+    $address = '';
     $ip = $_POST['ip'];
     $mac = $_POST['mac'];
     $mun = $_POST['mun'];
@@ -22,46 +22,52 @@
     $b_type = ' ';
     $c_type = ' ';
     
+    if($mun = 'Balanga City'){
+        $address = $addr . ", ". $brgy;
+    }else{
+        $address = $addr . ", ". $brgy.", ".$mun;
+    }
+
     if($subs == "new"){
-        $a_type = 'New Install';
+        $a_type = 'NEW INSTALL';
     }else if($subs == "cable"){
-        $a_type = 'Existing Cable';
+        $a_type = 'EXISTING CABLE';
     }else if($subs == "docsis"){
-        $a_type = 'Existing DOCSIS';
+        $a_type = 'EXISTING DOCSIS';
     }
     
     if($install == 'catv'){
-        $b_type = "Cable Only";
+        $b_type = "CABLE ONLY";
     }else if($install == 'netonly'){
-        $b_type = "Internet Only";
+        $b_type = "INTERNET ONLY";
     }else if($install == 'catvnet'){
-        $b_type = "Cable and Internet";
+        $b_type = "CABLE AND INTERNET";
     }else if($install == 'fbr_catv'){
-        $b_type = "Upgrade to Digital Box";
+        $b_type = "UPGRADE TO DIGITAL BOX";
     }else if($install == 'fbr_netonly'){
-        $b_type = "Upgrade to Fiber DISCO-CATV";
+        $b_type = "UPGRADE TO FIBER DISCO-CATV";
     }else if($install == 'fbr_catvnet'){
-        $b_type = "Upgrade to Fiber";
+        $b_type = "UPGRADE TO FIBER";
     }
     
     $c_type = $a_type ." ".$b_type;
 
 
-    $onu_model = $_POST['onu_model'];
     $ip = $_POST['ip'];
     $mac = $_POST['mac'];
     $serial = $_POST['serial'];
-    $boxn = $_POST['boxn'];
-    $cardn = $_POST['cardn'];
-    $wr_type = $_POST['wr_type'];
-    $wrStr = $_POST['wrStr'];
-    $wrEnd = $_POST['wrEnd'];
+    $onu_model = $_POST['onu_model'];
     $nap = $_POST['nap'];
     $slot = $_POST['slot'];
     $layer = $_POST['layer'];
     $lcp = $_POST['lcp'];
     $olt = $_POST['olt'];
     $gpon = $_POST['gpon'];
+    $wr_type = $_POST['wr_type'];
+    $wrStr = $_POST['wrStr'];
+    $wrEnd = $_POST['wrEnd'];
+    $boxn = $_POST['boxn'];
+    $cardn = $_POST['cardn'];
 
 // ='[value-16]'
 $sqlInfo = "UPDATE `subs_info_tbl` SET 
@@ -83,10 +89,37 @@ $sqlInfo = "UPDATE `subs_info_tbl` SET
     `lineman`= '".$lineman."' 
     WHERE `uid_` = ".$_SESSION['__id']."";
 
-    echo"<br/><br/>".$sqlInfo;
+    // echo"<br/><br/>".$sqlInfo;
+
+$sqlEquip = "UPDATE `subs_equip_tbl` SET
+`ip`= '".$ip."',
+`mac`= '".$mac."',
+`serial`= '".$serial."',
+`onu_model`= '".$onu_model."',
+`nap`= '".$nap."',
+`slot`= ".$slot.",
+`layer`= '".$layer."',
+`lcp`= '".$lcp."',
+`olt`= ".$olt.",
+`gpon`= '".$gpon."',
+`wr_type`= '".$wr_type."',
+`wr_start`= ".$wrStr.",
+`wr_end`= ".$wrEnd.",
+`box`= ".$boxn.",
+`card`= ".$cardn."
+ WHERE `subs_id`= ".$_SESSION['__id']."";
+
+    // echo"<br/><br/>".$sqlEquip;
+
 
     if ($con->query($sqlInfo)) {
-        printf("Record updated successfully.<br />");
+        if ($con->query($sqlEquip)) {
+            header('location: ../pages/subscriber.php');
+            echo"<script>alert('Subscriber's Info has been Updated')</script>";
+    }
+        if ($con->error) {
+            printf("Could not insert record into table: %s<br />", $con->error);
+        }
     }
     if ($con->error) {
         printf("Could not insert record into table: %s<br />", $con->error);

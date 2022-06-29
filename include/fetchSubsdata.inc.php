@@ -22,6 +22,8 @@ $subs_type =  $row['subs_type'];
 $install_type =  $row['install_type'];
 $plan =  $row['plan'];
 $lineman =  $row['lineman'];
+$disco =  $row['disco'];
+$recon =  $row['recon'];
 
 mysqli_free_result($result);
 
