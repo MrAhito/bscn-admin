@@ -9,16 +9,22 @@
 }
 
 .inf_ {
-    grid-template-columns: repeat(22, 1fr);
-    row-gap: 15px;
-
+    display: flex;
+    flex-wrap: wrap;
+    position: absolute;
+    top: 80px;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    justify-content: space-around;
+    align-content: flex-start;
 }
 
 .inf_head>a {
     cursor: pointer;
     color: var(--primary);
     text-decoration: none;
-    padding: 7px;
+    padding: 10px;
     display: flex;
     align-items: center;
     font-size: 1.175em;
@@ -33,13 +39,76 @@
     transition: .3s all ease-in-out;
 }
 
-.form_add>form-control>select:valid,
-.form_add>form-control>input,
-.form_add>form-control>select,
-.form_add>form-control>input:not(:placeholder-shown) {
-    border-bottom: 1px solid var(--fontDark2);
-    box-shadow: none;
+.form_section {
+    display: flex;
+    width: 48%;
+    height: 35%;
+    flex-direction: column;
+}
+
+.full_sect {
+    display: flex;
+    overflow: hidden;
+    height: 25%;
+    width: 99.5%;
+    flex-direction: column;
+}
+
+.header1 {
+    height: 40px;
+    border-radius: 5px 5px 0 0;
+}
+
+.header1>h2 {
+    width: 100%;
+
+}
+
+.forms_ {
+    border: 1px solid var(--shadow);
+    display: flex;
+    height: 100%;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-content: flex-start;
+    flex-direction: row;
+}
+
+.form_section>.forms_>.group {
+    display: flex;
+    flex-direction: column;
+    width: 31%;
+    margin: 1%;
+}
+
+.full_sect>.forms_>.group {
+    display: flex;
+    flex-direction: column;
+    width: 11%;
+    margin: 10px;
+}
+
+.group>label>pre {
+    padding: 5px;
+    font-size: .8em;
+    font-weight: 500;
+    margin: 0;
+}
+
+.group>select:valid,
+.group>input,
+.group>select,
+.group>input:not(:placeholder-shown) {
+    background-color: var(--fontDark);
+    filter: brightness(1.25);
+    font-size: .9em;
+    border-radius: 5px;
+    border: none;
+    text-transform: uppercase;
+    padding: 10px;
     pointer-events: none;
+    border-bottom: 1px solid var(--fontDark2);
+    outline: none;
 }
 
 .editInput {
@@ -48,67 +117,18 @@
 }
 
 .gr1 {
-    grid-column: 1/23;
-}
-
-.gr6-1 {
-    grid-column: 2/6;
-}
-
-.gr6-2 {
-    grid-column: 6/10;
-}
-
-.gr6-3 {
-    grid-column: 10/14;
-}
-
-.gr6-4 {
-    grid-column: 14/18;
-}
-
-.gr6-5 {
-    grid-column: 18/22;
-}
-
-.gr7-1 {
-    grid-column: 2/8;
-}
-
-.gr7-2 {
-    grid-column: 8/14;
-}
-
-.gr7-3 {
-    grid-column: 14/20;
-}
-
-.gr8-1 {
-    grid-column: 2/7;
-}
-
-.gr8-2 {
-    grid-column: 7/12;
-}
-
-.gr8-3 {
-    grid-column: 12/17;
-}
-
-.gr8-4 {
-    grid-column: 17/22;
-}
-
-.bt_5 {
-    margin-top: 10px;
+    width: 100%;
 }
 
 .divEdit {
     display: none;
     margin: 0;
+    position: absolute;
     overflow: hidden;
     justify-content: space-between;
     border-radius: 4px;
+    right: 10px;
+    top: -25px;
     width: 190px;
 }
 
@@ -126,6 +146,7 @@
 
 .subsInfBtn {
     font-size: .9em;
+    padding: 3px;
     width: 85px;
 }
 
@@ -144,6 +165,7 @@
 .canc:hover {
     background-color: var(--primary);
     color: var(--secondary);
-    transition: .3s all ease-in-out;;
+    transition: .3s all ease-in-out;
+    ;
 }
 </style>

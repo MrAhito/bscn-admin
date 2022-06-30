@@ -5,8 +5,10 @@
 
 .nav_bar {
     height: 50px;
+    position: sticky;
     top: 0;
     background-color: var(--secondary);
+    z-index: 9;
     display: flex;
     justify-content: space-between;
     box-shadow: 0px 2px 5px var(--shadow);
@@ -36,9 +38,10 @@
 .header_nav {
     list-style-type: none;
     margin: 0;
-    padding: 0;
+    background-color: var(--secondary);
     overflow: hidden;
     display: flex;
+    align-items: flex-end;
     flex-direction: row;
 }
 
@@ -54,7 +57,7 @@
     align-items: center;
     font-weight: 500;
     font-size: .8em;
-    padding-top: 5px;
+    padding: 5px 0;
     width: 125px;
     border-bottom: 5px solid var(--secondary);
     color: white;
@@ -94,7 +97,6 @@
 .userDrop {
     position: absolute;
     background-color: var(--shadow);
-    z-index: 9;
     display: none;
     flex-direction: column;
     border-radius: 4px;
@@ -131,6 +133,8 @@
 
 
 .elements {
+    padding-top: 16px;
+    z-index: -2;
     top: 35px;
 }
 
