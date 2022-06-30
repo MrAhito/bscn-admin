@@ -226,51 +226,52 @@ function selectOpt(el) {
 }
 
 function editableInputs() {
-    $('.form_add').children("form-control").children("input").addClass("editInput");
-    $('.form_add').children("form-control").children("select").addClass("editInput");
+    $('.group').children("input").addClass("editInput");
+    $('.group').children("select").addClass("editInput");
     $('.sinBtn').removeClass('showInfBtn');
     $('.douBtn').addClass('showInfBtn');
 }
 
 function cancelInputs() {
-    $('.form_add').children("form-control").children("input").removeClass("editInput");
-    $('.form_add').children("form-control").children("select").removeClass("editInput");
-    $('.douBtn').removeClass('showInfBtn');
-    $('.sinBtn').addClass('showInfBtn');
-    // Resetting Form
-    $('#lname').val(<?php echo "'" . $lname . "'" ?>);
-    $('#fname').val(<?php echo "'" . $fname . "'" ?>);
-    $('#mname').val(<?php echo "'" . $mname . "'" ?>);
-    if (<?php echo "'" . $addr . "'" ?> == '') {
-        $('#addr').val(<?php echo "'" . $address . "'" ?>);
-    } else {
-        $('#addr').val(<?php echo "'" . $addr . "'" ?>);
-    }
-    $('#cnum').val(<?php echo "'" . $contact_ . "'" ?>);
-    $('#email').val(<?php echo "'" . $email . "'" ?>);
-    $('#lineman').val(<?php echo "'" . $lineman . "'" ?>);
-    $('#ip').val(<?php echo "'" . $ip_address . "'" ?>);
-    $('#mac').val(<?php echo "'" . $mac_address . "'" ?>);
-    $('#serial').val(<?php echo "'" . $serial . "'" ?>);
-    $('#boxn').val(<?php echo "'" . $box . "'" ?>);
-    $('#cardn').val(<?php echo "'" . $card . "'" ?>);
-    $('#wrStr').val(<?php echo "'" . $wr_start . "'" ?>);
-    $('#wrEnd').val(<?php echo "'" . $wr_end . "'" ?>);
-    $('#nap').val(<?php echo "'" . $nap . "'" ?>);
-    $('#slot').val(<?php echo "'" . $slot . "'" ?>);
-    $('#olt').val(<?php echo "'" . $olt . "'" ?>);
-    $('#lcp').val(<?php echo "'" . $lcp . "'" ?>);
-    $('#layer').val(<?php echo "'" . $layer . "'" ?>);
-    $('#gpon').val(<?php echo "'" . $gpon . "'" ?>);
+    window.location.reload();
+    // $('.group').children("input").removeClass("editInput");
+    // $('.group').children("select").removeClass("editInput");
+    // $('.douBtn').removeClass('showInfBtn');
+    // $('.sinBtn').addClass('showInfBtn');
+    // // Resetting Form
+    // $('#lname').val(<?php echo "'" . $lname . "'" ?>);
+    // $('#fname').val(<?php echo "'" . $fname . "'" ?>);
+    // $('#mname').val(<?php echo "'" . $mname . "'" ?>);
+    // if (<?php echo "'" . $addr . "'" ?> == '') {
+    //     $('#addr').val(<?php echo "'" . $address . "'" ?>);
+    // } else {
+    //     $('#addr').val(<?php echo "'" . $addr . "'" ?>);
+    // }
+    // $('#cnum').val(<?php echo "'" . $contact_ . "'" ?>);
+    // $('#email').val(<?php echo "'" . $email . "'" ?>);
+    // $('#lineman').val(<?php echo "'" . $lineman . "'" ?>);
+    // $('#ip').val(<?php echo "'" . $ip_address . "'" ?>);
+    // $('#mac').val(<?php echo "'" . $mac_address . "'" ?>);
+    // $('#serial').val(<?php echo "'" . $serial . "'" ?>);
+    // $('#boxn').val(<?php echo "'" . $box . "'" ?>);
+    // $('#cardn').val(<?php echo "'" . $card . "'" ?>);
+    // $('#wrStr').val(<?php echo "'" . $wr_start . "'" ?>);
+    // $('#wrEnd').val(<?php echo "'" . $wr_end . "'" ?>);
+    // $('#nap').val(<?php echo "'" . $nap . "'" ?>);
+    // $('#slot').val(<?php echo "'" . $slot . "'" ?>);
+    // $('#olt').val(<?php echo "'" . $olt . "'" ?>);
+    // $('#lcp').val(<?php echo "'" . $lcp . "'" ?>);
+    // $('#layer').val(<?php echo "'" . $layer . "'" ?>);
+    // $('#gpon').val(<?php echo "'" . $gpon . "'" ?>);
 
-    if (<?php echo "'" . $mun . "'" ?> == 'Balanga City') {
-        $('#mun option[value="Balanga City"]').attr("selected", "selected");
-    } else if (<?php echo "'" . $mun . "'" ?> == 'Pilar') {
-        $('#mun option[value="Pilar"]').attr("selected", "selected");
-    } else if (<?php echo "'" . $mun . "'" ?> == 'Orion') {
-        $('#mun option[value="Orion"]').attr("selected", "selected");
-    } else {
-        $('#mun option[value=""]').attr("selected", "selected");
-    }
+    // if (<?php echo "'" . $mun . "'" ?> == 'Balanga City') {
+    //     $('#mun option[value="Balanga City"]').attr("selected", "selected");
+    // } else if (<?php echo "'" . $mun . "'" ?> == 'Pilar') {
+    //     $('#mun option[value="Pilar"]').attr("selected", "selected");
+    // } else if (<?php echo "'" . $mun . "'" ?> == 'Orion') {
+    //     $('#mun option[value="Orion"]').attr("selected", "selected");
+    // } else {
+    //     $('#mun option[value=""]').attr("selected", "selected");
+    // }
 }
     </script>
