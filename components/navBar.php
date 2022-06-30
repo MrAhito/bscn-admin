@@ -16,8 +16,8 @@ include_once '../styles/navBar.style.php'; ?>
         <li>
             <ul class="elements" id="elemnt_">
                 <li><a href="../include/optRoutes.inc.php?route=''&id=''"><i class="fas fa-users"></i>Subscribers</a></li>
-                <li><a><i class="fas fa-map"></i>Plans</a></li>
-                <li><a><i class="fas fa-hdd"></i>ONUs</a></li>
+                <li><a href="../include/optRoutes.inc.php?route=l&id=''"><i class="fas fa-map"></i>Plans</a></li>
+                <li><a href="../include/optRoutes.inc.php?route=n&id=''"><i class="fas fa-hdd"></i>ONUs</a></li>
             </ul>
             <a class="a_elements" onclick="showEl()">Elements <i class="fas fa-caret-down"></i></a>
         </li>

@@ -13,6 +13,7 @@ $brgy = $_POST['brgy'];
 $mun = $_POST['mun'];
 $address = $addr . ", ". $brgy.", ".$mun;
 $cnum = $_POST['cnum'];
+$email = $_POST['email'];
 $lineman = $_POST['lineman'];
 $wr_type = $_POST['wr_type'];
 $wrStr = $_POST['wrStr'];
@@ -63,9 +64,11 @@ $c_type = $a_type ." ".$b_type;
 // Equipments Info
 if($install=='catv' || $install=='fbr_catv') {
 $card=$_POST['cardn'];
-$box=$_POST['boxn'];;
+$box=$_POST['boxn'];
 }
 if($install=='netonly' || $install=='fbr_netonly') {
+$card=0;
+$box=0;
 $plan = $_POST['plan'];
 $ip= $_POST['ip'];
 $mac= $_POST['mac'];
@@ -91,26 +94,46 @@ if($install=='catvnet' || $install=='fbr_catvnet') {
     $olt= $_POST['olt'];
     $gpon= $_POST['gpon'];
     $card=$_POST['cardn'];
-    $box=$_POST['boxn'];;
+    $box=$_POST['boxn'];
 }
 
-$sqlInfo = "INSERT INTO `subs_info_tbl`
-(`fname`, `mname`, `lname`, `contact_`, `address`, `ip_address`, `mac_address`, `mun`, `brgy`, `addr`, `type`, `subs_type`, 
+$sqlInfo = "INSERT INTO 
+`subs_info_tbl`(`fname`, `mname`, `lname`, `contact_`, `email`, `address`, `ip_address`, `mac_address`, `mun`, `brgy`, `addr`, `type`, 
+`subs_type`, `install_type`, `plan`, `lineman`) 
+VALUES
+('".$fname."','".$mname."','".$lname."','".$cnum."','".$email."','".$address."','".$ip."','".$mac."','".$mun."','".$brgy."',
+'".$addr."','".$c_type."','".$subs."','".$install."','".$plan."','".$lineman."')";
+
+/*
+
+INSERT INTO `subs_info_tbl`
+(`fname`, `mname`, `lname`, `contact_`, `email`, `address`, `ip_address`, `mac_address`, `mun`, `brgy`, `addr`, `type`, `subs_type`, 
 `install_type`, `plan`, `lineman`) 
 VALUES 
-('".$fname."','".$mname."','".$lname."','".$cnum."','".$address."','".$ip."','".$mac."','".$mun."','".$brgy."',
-'".$addr."','".$c_type."','".$subs."','".$install."','".$plan."','".$lineman."');";
+('".$fname."','".$mname."','".$lname."','".$cnum."','".$email."','".$address."','".$ip."','".$mac."','".$mun."','".$brgy."',
+'".$addr."','".$c_type."','".$subs."','".$install."','".$plan."','".$lineman."');
 
-$sqlEquip = "INSERT INTO `subs_equip_tbl`
-(`ip`, `mac`, `serial`, `onu_model`, `nap`, `slot`, `layer`, `lcp`, `olt`, `gpon`, `wr_type`, `wr_start`, `wr_end`, `box`, `card`) 
-VALUES 
-('".$ip."','".$mac."','".$serial."','".$onu_model."','".$nap."',".$slot.",'".$layer."','".$lcp."',".$olt.",'".$gpon."',
-'".$wr_type."',".$wrStr.",".$wrEnd.",".$box.",".$card.")";
+INSERT INTO 
+`subs_info_tbl`(`uid_`, `status`, `fname`, `mname`, `lname`, `contact_`, `email`, `address`, `ip_address`, `mac_address`, `mun`, `brgy`, `addr`, `type`, 
+`subs_type`, `install_type`, `plan`, `lineman`, `date_installed`, `disco`, `recon`) 
+VALUES
+('[value-1]','[value-2]','[value-3]','[value-4]','[value-5]','[value-6]','[value-7]','[value-8]','[value-9]','[value-10]','[value-11]','[value-12]',
+'[value-13]','[value-14]','[value-15]','[value-16]','[value-17]','[value-18]','[value-19]','[value-20]','[value-21]')
 
+ INSERT INTO `subs_equip_tbl`(`uid_`, ) VALUES ('[value-1]','[value-2]','[value-3]','[value-4]','[value-5]','[value-6]','[value-7]','[value-8]','[value-9]','[value-10]','[value-11]','[value-12]','[value-13]','[value-14]','[value-15]','[value-16]','[value-17]')
 // echo "<br/><br/>".$sqlInfo;
 // echo "<br/><br/>".$sqlEquip;
-
+*/
+//
     if ($con->query($sqlInfo)) {
+            $id_ = $con->insert_id;
+        
+            $sqlEquip = "INSERT INTO 
+            `subs_equip_tbl` (`subs_id`, `ip`, `mac`, `serial`, `onu_model`, `nap`, `slot`, `layer`, `lcp`, `olt`, `gpon`, `wr_type`, `wr_start`, `wr_end`, `box`, `card`) 
+            VALUES 
+            (".$id_.", '".$ip."','".$mac."','".$serial."','".$onu_model."','".$nap."',".$slot.",'".$layer."','".$lcp."',".$olt.",'".$gpon."',
+            '".$wr_type."',".$wrStr.",".$wrEnd.",".$box.",".$card.");";
+            
         if ($con->query($sqlEquip)) {
             echo"<script>alert('Could not insert record');</script>";
             header("location: ../pages/dashboard.php");
