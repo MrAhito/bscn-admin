@@ -27,7 +27,7 @@ $columns = array(
         'db'        => 'ip_address',
         'dt'        => 7,
         'formatter' => function ($d, $row) {
-            return "<a href='http://".$d."' rel='noopener noreferrer' target='_blank'>" . $d . "</a>";
+            return "<a href='http://" . $d . "' rel='noopener noreferrer' target='_blank'>" . $d . "</a>";
         }
     ),
     array('db' => 'mac_address',     'dt' => 8),
@@ -43,19 +43,19 @@ $columns = array(
         'db'        => 'plan',
         'dt'        => 11,
         'formatter' => function ($d, $row) {
-            
-            
+
+
             include '../include/db.inc.php';
             $sql = "SELECT * FROM package_tbl";
             $result = $con->query($sql);
             if ($result->num_rows > 0) {
                 while ($row = $result->fetch_assoc()) {
-                    if($d == $row['code']){
+                    if ($d == $row['code']) {
                         $d = $row['desc_'];
                     }
                 }
                 return $d;
-            }else{
+            } else {
                 return $d;
             }
             mysqli_free_result($result);
@@ -69,21 +69,21 @@ $columns = array(
             $a = '';
             $b = '';
             $c = '';
-            if($row['status'] != 0){
+            if ($row['status'] != 0) {
                 $a = "Disconnect";
                 $b = "del";
-                $c = "../include/optRoutes.inc.php?id=".$d."&route=s";
-            }else{
+                $c = "../include/optRoutes.inc.php?id=" . $d . "&route=s";
+            } else {
                 $a = "Reconnect";
                 $b = "rel";
-                $c = "../include/optRoutes.inc.php?id=".$d."&route=r";
+                $c = "../include/optRoutes.inc.php?id=" . $d . "&route=r";
             }
 
             return "<div class='optDiv'>
-                <i class='fas fa-cogs sett' onclick='showOpts(".$d.")'></i>
-                <ul name='opt_list' class='opt_list' id='vieWList".$d."' onclick='setOff(".$d.")'>
-                    <li><a href='../include/optRoutes.inc.php?id=".$d."&route=c'>Account Info</a></li>
-                    <li class='".$b."'><a href='".$c."'>".$a."</a></li>
+                <i class='fas fa-cogs sett' onclick='showOpts(" . $d . ")'></i>
+                <ul name='opt_list' class='opt_list' id='vieWList" . $d . "' onclick='setOff(" . $d . ")'>
+                    <li><a href='../include/optRoutes.inc.php?id=" . $d . "&route=c'>Account Info</a></li>
+                    <li class='" . $b . "'><a href='" . $c . "'>" . $a . "</a></li>
                 </ul>
                 <div class='blocker'><div>
             <div>";
