@@ -44,10 +44,10 @@ include_once '../themes/header.php';
 }
 
 .planChart {
-    width: 33vw;
+    width: 28vw;
     display: flex;
     align-items: center;
-    padding: 0 42px;
+    padding: 0 98px;
 }
 </style>
 <section class="section_dash">
@@ -78,74 +78,106 @@ include_once '../themes/header.php';
 // run the query
 include '../include/db.inc.php';
 
-$sql = "SELECT plan FROM subs_info_tbl";
 $sql2 = "SELECT date_installed FROM subs_info_tbl";
-$result = $con->query($sql);
 $result2 = $con->query($sql2);
 
-// fetch all results into an array
-$response = array();
 $dates = array();
-while ($row = $result->fetch_assoc())
-    $response[] = $row;
 while ($daterow = $result2->fetch_assoc())
     $dates[] = $daterow;
 
-// save the JSON encoded array
-$jsonData = json_encode($response);
+mysqli_free_result($result2);
 $jsonDates = json_encode($dates);
+
+
+$bundle1 = 0;
+$bundle2 = 0;
+$bundle3 = 0;
+$bundle4 = 0;
+$bundle5 = 0;
+$bundle6 = 0;
+$net1 = 0;
+$net2 = 0;
+$net3 = 0;
+$net4 = 0;
+$others = 0;
+
+$sqlarr = array(
+    array('b1', 'SELECT uid_ FROM subs_info_tbl where plan = "bundle-1" OR plan = "1000"'),
+    array('b2', 'SELECT uid_ FROM subs_info_tbl where plan = "bundle-2" OR plan = "1250"'),
+    array('b3', 'SELECT uid_ FROM subs_info_tbl where plan = "bundle-3" OR plan = "1400"'),
+    array('b4', 'SELECT uid_ FROM subs_info_tbl where plan = "bundle-4" OR plan = "1850"'),
+    array('b5', 'SELECT uid_ FROM subs_info_tbl where plan = "bundle-5" OR plan = "2600"'),
+    array('b6', 'SELECT uid_ FROM subs_info_tbl where plan = "bundle-6" OR plan = "3100"'),
+    array('n1', 'SELECT uid_ FROM subs_info_tbl where plan = "inetOnly-1" OR plan = "1500"'),
+    array('n2', 'SELECT uid_ FROM subs_info_tbl where plan = "inetOnly-2" OR plan = "2250"'),
+    array('n3', 'SELECT uid_ FROM subs_info_tbl where plan = "inetOnly-3" OR plan = "2750"'),
+    array('n4', 'SELECT uid_ FROM subs_info_tbl where plan = "3250"'),
+
+);
+for($a = 0; $a < count($sqlarr); $a++){ 
+    $res = $con->query($sqlarr[$a][1]);
+     if ($res){
+        $row = mysqli_num_rows($res);
+        if ($row){
+            if($sqlarr[$a][0] == 'b1'){ $bundle1 = $row;}
+            if($sqlarr[$a][0] == 'b2'){ $bundle2 = $row;}
+            if($sqlarr[$a][0] == 'b3'){ $bundle3 = $row;}
+            if($sqlarr[$a][0] == 'b4'){ $bundle4 = $row;}
+            if($sqlarr[$a][0] == 'b5'){ $bundle5 = $row;}
+            if($sqlarr[$a][0] == 'b6'){ $bundle6= $row;}
+            if($sqlarr[$a][0] == 'n1'){ $net1 = $row;}
+            if($sqlarr[$a][0] == 'n2'){ $net2 = $row;}
+            if($sqlarr[$a][0] == 'n3'){ $net3 = $row;}
+            if($sqlarr[$a][0] == 'n4'){ $net5 = $row;}
+        }
+        mysqli_free_result($res);
+    }
+}
+$monthVal = array();
+$dayVal = array();
+$year_ =  date("Y");
+$month_ =  date("m")-1;
+$numDays_ =  date("t");
+
+// Monthly
+for($m = 1; $m <= 12; $m++ ){
+    if($m < 10){
+        $sqlDate = "SELECT uid_ FROM `subs_info_tbl` WHERE `date_installed` LIKE '%2022-0".$m."%'";
+    }else{
+        $sqlDate = "SELECT uid_ FROM `subs_info_tbl` WHERE `date_installed` LIKE '%2022-".$m."%'";
+    }
+    $res = $con->query($sqlDate);
+    $row = mysqli_num_rows($res);
+    if ($row){
+        array_push($monthVal, $row);
+    }else{
+        array_push($monthVal, 0);
+    }
+}
+$jsonDates = json_encode($monthVal);
+
+
+for($d = 1; $d <= $numDays_-1; $d++ ){
+    if($d < 10){
+        $sqlDate = "SELECT uid_ FROM `subs_info_tbl` WHERE `date_installed` LIKE '%2022-0".$month_."-0".$d."%'";
+    }else{
+        $sqlDate = "SELECT uid_ FROM `subs_info_tbl` WHERE `date_installed` LIKE '%2022-0".$month_."-".$d."%'";
+    }
+
+    $res = $con->query($sqlDate);
+    $row = mysqli_num_rows($res);
+    if ($row){
+        array_push($dayVal, $row);
+    }else{
+        array_push($dayVal, 0);
+    }
+}
+$jsonDays = json_encode($dayVal);
+
+$con->close();
 
 ?>
 <script>
-var PlanperSubs = <?= $jsonData . ";" ?>
-var DatesSubs = <?= $jsonDates . ";" ?>
-
-var bundle1 = 0;
-var bundle2 = 0;
-var bundle3 = 0;
-var bundle4 = 0;
-var bundle5 = 0;
-var bundle6 = 0;
-var net1 = 0;
-var net2 = 0;
-var net3 = 0;
-
-var getLength = function(obj) {
-    var i = 0,
-        key;
-    for (key in obj) {
-        if (obj.hasOwnProperty(key)) {
-            i++;
-        }
-    }
-    return i;
-};
-// Plans
-for (var i = 0; i < getLength(PlanperSubs); i++) {
-    if (PlanperSubs[i]['plan'] == '1000' || PlanperSubs[i]['plan'] == 'bundle-1') {
-        bundle1++;
-    } else if (PlanperSubs[i]['plan'] == '1250' || PlanperSubs[i]['plan'] == 'bundle-2') {
-        bundle2++;
-    } else if (PlanperSubs[i]['plan'] == '1400' || PlanperSubs[i]['plan'] == 'bundle-3') {
-        bundle3++;
-    } else if (PlanperSubs[i]['plan'] == '1850' || PlanperSubs[i]['plan'] == 'bundle-4') {
-        bundle4++;
-    } else if (PlanperSubs[i]['plan'] == '2600' || PlanperSubs[i]['plan'] == 'bundle-5') {
-        bundle5++;
-    } else if (PlanperSubs[i]['plan'] == '3100' || PlanperSubs[i]['plan'] == 'bundle-6') {
-        bundle6++;
-    } else if (PlanperSubs[i]['plan'] == '1500' || PlanperSubs[i]['plan'] == 'inetOnly-1') {
-        net1++;
-    } else if (PlanperSubs[i]['plan'] == '2250' || PlanperSubs[i]['plan'] == 'inetOnly-2') {
-        net2++;
-    } else if (PlanperSubs[i]['plan'] == '2750' || PlanperSubs[i]['plan'] == 'inetOnly-3') {
-        net3++;
-    } else if (PlanperSubs[i]['plan'] == '3250') {
-        net3++;
-    }
-}
-
-// Dates
 function getDaysInCurrentMonth() {
     const date = new Date();
 
@@ -177,60 +209,27 @@ for (var i = 1; i <= months; i++) {
     dayLabels.push(i.toString());
 }
 
-// ?Daily
-count = 0;
-for (var i = 1; i <= months; i++) {
-
-    for (var a = 0; a < getLength(DatesSubs); a++) {
-        if (i < 10) {
-            if (DatesSubs[a]['date_installed'] == Year.toString() + '-0' + Monthsa.toString() + '-0' + i) {
-                count++;
-            }
-        } else {
-            if (DatesSubs[a]['date_installed'] == Year.toString() + '-0' + Monthsa.toString() + '-' + i) {
-                count++;
-            }
-        }
-    }
-    dayValues.push(count.toString());
-    count = 0;
-
-}
-
-// ?Monthly
-countM = 0;
-for (var c = 1; c <= 12; c++) {
-    for (var a = 0; a < getLength(DatesSubs); a++) {
-        // console.log(DatesSubs[a]['date_installed'].substring(0, 7));
-        if (c < 10) {
-            if (DatesSubs[a]['date_installed'].substring(0, 7) == Year.toString() + '-0' + c) {
-                countM++;
-            }
-        } else {
-            if (DatesSubs[a]['date_installed'].substring(0, 7) == Year.toString() + '-' + c) {
-                countM++;
-            }
-
-        }
-    }
-    monthValues.push(countM.toString());
-    countM = 0;
-}
-
-
-
+var bundle1 = <?php echo $bundle1;?>;
+var bundle2 = <?php echo $bundle2;?>;
+var bundle3 = <?php echo $bundle3;?>;
+var bundle4 = <?php echo $bundle4;?>;
+var bundle5 = <?php echo $bundle5;?>;
+var bundle6 = <?php echo $bundle6;?>;
+var net1 = <?php echo $net1;?>;
+var net2 = <?php echo $net2;?>;
+var net3 = <?php echo $net3 + $net4;?>;
+monthValues = <?= $jsonDates;?>;
+dayValues = <?= $jsonDays;?>;
 
 var day = document.getElementById('dayChart');
 var mydayChart = new Chart(day, {
-    type: 'line',
+    type: 'bar',
     data: {
         labels: dayLabels,
         datasets: [{
             label: 'Daily # of Install (' + monthName + ')',
-            data: dayValues,
-            // [22, 19, 31, 15, 12, 31, 12, 11, 3, 5, 2, 3, 12, 19, 3, 5, 2, 3, 12, 19, 3, 5, 2, 3,
-            //     12, 19, 3, 5, 2, 3, 6, 6
-            // ]
+            data: 
+            dayValues,
             backgroundColor: [
                 'rgba(69, 67, 114, 1)'
             ],
@@ -249,8 +248,8 @@ var mymonthChart = new Chart(month, {
         labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sept', 'Oct', 'Nov', 'Dec'],
         datasets: [{
             label: 'Monthly # of Install(' + Year + ')',
-            data: monthValues,
-            //  [22, 19, 31, 15, 12, 31, 12, 11, 3, 5, 2, 3, 5, 2, 3],
+            data: 
+            monthValues,
             backgroundColor: [
                 'rgba(69, 67, 114, 1)'
             ],
@@ -273,10 +272,9 @@ var myplanChart = new Chart(plan, {
         datasets: [{
             data: [bundle1, bundle2, bundle3, bundle4, net1, bundle5, net2, bundle6, net3],
             backgroundColor: [
-                'red', 'orange', 'yellow', 'green', 'blue', 'indigo', 'violet', 'skyblue',
-                'gray'
+                '#D1C4E9', '#9575CD', '#673AB7', '#512DA8', '#311B92', '#283593', '#3949AB', '#5C6BC0',
+                '#7986CB'
             ],
-            borderJoinStyle: 'miter',
             borderColor: [
                 'rgba(0,0,0, 1)'
             ],
@@ -288,8 +286,19 @@ var myplanChart = new Chart(plan, {
             legend: {
                 position: "left"
             },
+            title: {
+                display: true,
+                text: 'Plan Chart',
+                font: {
+                        size: 18
+                    },
+                padding: {
+                    top:90,
+                    bottom:-90,
+                }
+            }
         },
-    },
+    }
 });
 </script>
 <?php
