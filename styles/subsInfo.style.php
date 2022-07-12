@@ -20,13 +20,26 @@
     align-content: flex-start;
 }
 
+.inf_head {
+    /* background-color: var(--primary); */
+    display: flex;
+    /* border-color: var(--primary); */
+    height: 35px;
+    align-items: center;
+    justify-content: center;
+
+}
+
 .inf_head>a {
-    cursor: pointer;
     color: var(--primary);
+    cursor: pointer;
     text-decoration: none;
     padding: 10px;
     display: flex;
+    /* font-weight: 800; */
     align-items: center;
+    position: absolute;
+    left: 10px;
     font-size: 1.175em;
 }
 
@@ -39,23 +52,51 @@
     transition: .3s all ease-in-out;
 }
 
+.alert_info {
+    display: flex;
+    font-size: 12px;
+    padding: 5px 10px;
+    font-weight: 600;
+    align-items: center;
+    justify-content: center;
+}
+
+.alert_info>i {
+    font-size: 12px;
+    margin: 0 7px 0 0;
+}
+
+.warning {
+    color: yellow;
+    border: 1px solid yellow;
+}
+
+.success {
+    color: yellowgreen;
+    border: 1px solid yellowgreen;
+}
+
+.error {
+    color: red;
+    border: 1px solid red;
+}
+
 .form_section {
     display: flex;
-    width: 48%;
-    height: 35%;
-    flex-direction: column;
+    flex-direction: row;
+    width: 99.5%;
+    justify-content: space-between;
 }
 
 .full_sect {
     display: flex;
     overflow: hidden;
-    height: 25%;
     width: 99.5%;
     flex-direction: column;
 }
 
 .header1 {
-    height: 40px;
+    height: 35px;
     border-radius: 5px 5px 0 0;
 }
 
@@ -65,6 +106,18 @@
 }
 
 .forms_ {
+    border: 1px solid var(--shadow);
+    display: flex;
+    border-radius: 6px 6px 0 0;
+    width: 49%;
+    height: 100%;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-content: flex-start;
+    flex-direction: row;
+}
+
+.forms_2 {
     border: 1px solid var(--shadow);
     display: flex;
     height: 100%;
@@ -78,14 +131,24 @@
     display: flex;
     flex-direction: column;
     width: 31%;
-    margin: 1%;
+    height: fit-content;
+    margin: 0 1% 10px 1%;
 }
 
-.full_sect>.forms_>.group {
+.full_sect>.forms_2>.group {
     display: flex;
     flex-direction: column;
+    height: fit-content;
     width: 11%;
-    margin: 10px;
+    margin: 0 10px 10px 10px;
+}
+
+.personalAcc {
+    display: flex;
+    flex-direction: row;
+    height: fit-content;
+    justify-content: space-between;
+    margin: 0 5px;
 }
 
 .group>label>pre {
@@ -101,7 +164,7 @@
 .group>input:not(:placeholder-shown) {
     background-color: var(--fontDark);
     filter: brightness(1.25);
-    font-size: .9em;
+    font-size: 0.75em;
     border-radius: 5px;
     border: none;
     text-transform: uppercase;
