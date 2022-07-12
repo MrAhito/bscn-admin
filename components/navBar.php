@@ -1,5 +1,5 @@
 <?php
-if (!isset($_SESSION['code'])) {
+if (!isset($_SESSION['code']) && !isset($_SESSION['_id']) && !isset($_SESSION['name'])) {
     header("location: log-in.php");
     exit();
 }
@@ -15,7 +15,8 @@ include_once '../styles/navBar.style.php'; ?>
         <li><a href="../pages/dashboard.php">Home</a></li>
         <li>
             <ul class="elements" id="elemnt_">
-                <li><a href="../include/optRoutes.inc.php?route=''&id=''"><i class="fas fa-users"></i>Subscribers</a></li>
+                <li><a href="../include/optRoutes.inc.php?route=''&id=''"><i class="fas fa-users"></i>Subscribers</a>
+                </li>
                 <li><a href="../include/optRoutes.inc.php?route=l&id=''"><i class="fas fa-map"></i>Plans</a></li>
                 <li><a href="../include/optRoutes.inc.php?route=n&id=''"><i class="fas fa-hdd"></i>ONUs</a></li>
             </ul>

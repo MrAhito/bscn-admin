@@ -1,24 +1,33 @@
-<?php include '../styles/subsInfo.style.php'; ?>
+<?php include '../styles/subsInfo.style.php';
+
+?>
 <div class="info_sub ">
     <div class="add_head inf_head">
         <a href="../include/optRoutes.inc.php?route=''&id=''"><i class="fas fa-arrow-left"></i> Subscribers List</a>
+        <?php
+        if (isset($_SESSION['alert'])) {
+            echo '
+                <span class="' . $_SESSION['alert'][0] . '">
+                <i class="fas fa-exclamation-triangle"></i>' . $_SESSION['alert'][1] . '
+                </span>';
+        } ?>
     </div>
     <form class="form_add inf_" id='formAdd' method="POST" action="../include/subsUpdate.inc.php">
         <section class="form_section">
-            <span class="header1 gr1">
-                <h2>Personal Information</h2>
-                <div class="divEdit sinBtn showInfBtn ">
-                    <button id="editBtn" type="button" onclick="editableInputs()" class='_btn subsInfBtn'><i
-                            class="fas fa-edit"></i>Edit</button>
-                </div>
-                <div class="divEdit douBtn">
-                    <button id="cancelBtn" type="button" onclick="cancelInputs()" class='_btn subsInfBtn canc'><i
-                            class="fas fa-ban"></i>Cancel</button>
-                    <button id="saveBtn" type="submit" name="submit" class='_btn subsInfBtn'><i
-                            class="fas fa-save"></i>Save</button>
-                </div>
-            </span>
             <div class="forms_">
+                <span class="header1 gr1">
+                    <h2>Personal Information</h2>
+                    <div class="divEdit sinBtn showInfBtn ">
+                        <button id="editBtn" type="button" onclick="editableInputs()" class='_btn subsInfBtn'><i
+                                class="fas fa-edit"></i>Edit</button>
+                    </div>
+                    <div class="divEdit douBtn">
+                        <button id="cancelBtn" type="button" onclick="cancelInputs()" class='_btn subsInfBtn canc'><i
+                                class="fas fa-ban"></i>Cancel</button>
+                        <button id="saveBtn" type="submit" name="submit" class='_btn subsInfBtn'><i
+                                class="fas fa-save"></i>Save</button>
+                    </div>
+                </span>
                 <form-control class="group ">
                     <label>
                         <pre>Last Name: </pre>
@@ -97,13 +106,10 @@
                     <input class="email" type="text" value="<?php echo "" . $email; ?>" name="email" id="email" />
                 </form-control>
             </div>
-        </section>
-        <section class="form_section">
-            <span class="header1 gr1">
-                <h2>Account Information</h2>
-            </span>
             <div class="forms_">
-
+                <span class="header1 gr1">
+                    <h2>Account Information</h2>
+                </span>
                 <form-control class="group">
                     <label>
                         <pre>Subscriber: </pre>
@@ -138,13 +144,16 @@
                                 } ?> style="display:none" id='newsub-3' value="catvnet">CABLE AND INTERNET</option>
                         <option <?php if ($install_type == "fbr_catv") {
                                     echo "selected";
-                                } ?> style="display:none" id='existc-1' value="fbr_catv">UPGRADE TO FIBER CATV</option>
+                                } ?> style="display:none" id='existc-1' value="fbr_catv">UPGRADE TO FIBER CATV
+                        </option>
                         <option <?php if ($install_type == "fbr_catvnet") {
                                     echo "selected";
-                                } ?> style="display:none" id='exist-1' value="fbr_catvnet">UPGRADE TO FIBER </option>
+                                } ?> style="display:none" id='exist-1' value="fbr_catvnet">UPGRADE TO FIBER
+                        </option>
                         <option <?php if ($install_type == "fbr_netonly") {
                                     echo "selected";
-                                } ?> style="display:none" id='exist-2' value="fbr_netonly">UPGRADE TO FIBER DISCO-CABLE
+                                } ?> style="display:none" id='exist-2' value="fbr_netonly">UPGRADE TO FIBER
+                            DISCO-CABLE
                         </option>
                     </select>
                 </form-control>
@@ -194,12 +203,11 @@
                 </form-control>
             </div>
         </section>
-
         <section class="full_sect">
             <span class="header1 gr1">
                 <h2 class="gr1">Equipment Information</h2>
             </span>
-            <div class="forms_">
+            <div class="forms_2">
                 <form-control class="group">
                     <label>
                         <pre>ONU Model: </pre>
@@ -338,6 +346,11 @@
                     </thead>
                     <tbody>
                         <?php
+                        include '../include/db.inc.php';
+
+                        $sq = "SELECT * FROM subs_history_tbl WHERE subs_id = " . $_SESSION['__id'] . "";
+
+                        $resu = $con->query($sq);
                         if ($resu->num_rows > 0) {
                             while ($row3 = $resu->fetch_assoc()) {
                                 echo "
@@ -350,9 +363,9 @@
                         </tr>
                        ";
                             }
-                        } else {
                         }
                         mysqli_free_result($resu);
+                        $con->close();
                         ?>
                     </tbody>
                 </table>
