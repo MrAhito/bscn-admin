@@ -1,11 +1,12 @@
 <?php
 
 include_once '../include/db.inc.php';
-$data = $_SESSION['__id'];
 
-$sql = "SELECT * FROM subs_info_tbl WHERE uid_ = ".$_SESSION['__id']."";
+$sql = "SELECT * FROM subs_info_tbl WHERE uid_ = " . $_SESSION['__id'] . "";
 $result = $con->query($sql);
 $row = mysqli_fetch_assoc($result);
+$_SESSION['personal'] = $row;
+
 $fname =  $row['fname'];
 $mname =  $row['mname'];
 $lname =  $row['lname'];
@@ -27,9 +28,10 @@ $recon =  $row['recon'];
 
 mysqli_free_result($result);
 
-$sql2 = "SELECT * FROM subs_equip_tbl WHERE uid_ = ".$_SESSION['__id']."";
+$sql2 = "SELECT * FROM subs_equip_tbl WHERE uid_ = " . $_SESSION['__id'] . "";
 $res = $con->query($sql2);
 $row2 = mysqli_fetch_assoc($res);
+$_SESSION['equip'] = $row2;
 
 $serial =  $row2['serial'];
 $onu_model =  $row2['onu_model'];
@@ -46,8 +48,3 @@ $box =  $row2['box'];
 $card =  $row2['card'];
 
 mysqli_free_result($res);
-
-$sq = "SELECT * FROM subs_history_tbl WHERE uid_ = ".$_SESSION['__id']."";
-
-$resu = $con->query($sq);
-?>
